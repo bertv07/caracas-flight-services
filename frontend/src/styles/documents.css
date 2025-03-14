@@ -1,0 +1,38 @@
+.documents-section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.documents-section h2 {
+  color: var(--color-green);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.documents-info {
+  margin-bottom: 1.5rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+.documents-form {
+  max-width: 600px;
+}
+
+.image-preview {
+  margin-top: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0.5rem;
+  max-width: 300px;
+}
+
+.image-preview img {
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+}
+

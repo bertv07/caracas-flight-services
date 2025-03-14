@@ -1,0 +1,113 @@
+.subscriptions-section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.subscriptions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.subscriptions-header h2 {
+  color: var(--color-green);
+  margin: 0;
+}
+
+.add-subscription-button {
+  background-color: var(--color-green);
+  color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.add-subscription-button:hover {
+  background-color: var(--green-button-hover);
+}
+
+.no-subscriptions {
+  text-align: center;
+  padding: 3rem 0;
+  color: #666;
+}
+
+.no-subscriptions p {
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;
+}
+
+.subscriptions-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.subscription-card {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.subscription-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.subscription-info {
+  padding: 1.5rem;
+}
+
+.subscription-info h3 {
+  color: var(--color-green);
+  margin-bottom: 0.5rem;
+}
+
+.subscription-description {
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.subscription-details {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.subscription-price {
+  color: var(--color-green);
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.subscription-actions {
+  padding: 1rem 1.5rem;
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+}
+
+.cancel-subscription-button {
+  width: 100%;
+  padding: 0.6rem;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.cancel-subscription-button:hover {
+  background-color: #d32f2f;
+}
+

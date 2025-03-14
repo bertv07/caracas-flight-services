@@ -90,6 +90,18 @@
   }
   .service-card p {
     width: 40rem;
+    font-size: 1.4rem;
+    font-weight: 200;
+  }
+  .service-card h3{
+    font-size: 1.7rem ;
+  }
+  .cards {
+    width: 85%;
+    height: 470px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -103,6 +115,7 @@
   .circular-nav {
     margin-left: -5rem;
   }
+  
   .service-card p {
     width: 35rem;
   }

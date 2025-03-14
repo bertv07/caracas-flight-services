@@ -122,7 +122,7 @@
   
   .fondo-1 {
     width: 100vw;
-    height: 84vh;
+    height: 100vh;
     background-position: top left;
     background-repeat: no-repeat;
   }
@@ -227,7 +227,6 @@
     z-index: 3;
     background-color: var(--color-green);
     width: 85%;
-    height: 631px;
     border-radius: 200px 0px 0px 200px;
   }
   
@@ -307,7 +306,8 @@
   }
   
   .service-card {
-    height: 27vh;
+    height: auto;
+    max-height: 40vh;
     background-color: var(--background-black);
     border-radius: 80px 0 0 80px;
     position: absolute;
@@ -632,7 +632,7 @@
   /*Contactar*/
   .contactanos {
     width: 100vw;
-    height: 88vh;
+    min-height: 88vh;
     background-color: var(--background-black);
     display: flex;
     align-items: center;
