@@ -4,6 +4,9 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "../../styles/auth.css"
 
+// Importar el servicio de autenticación
+import { authService } from "../services/authServices"
+
 export default function LoginForm() {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
@@ -27,35 +30,31 @@ export default function LoginForm() {
     setLoading(true)
 
     try {
-      // Llamada directa a tu API de backend
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-        credentials: "include", // Para que las cookies se envíen/reciban
-      })
+      const data = await authService.login(formData.emailOrUsername, formData.password)
+      console.log("Datos recibidos del servidor:", data)
 
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || "Error al iniciar sesión")
-      }
-
-      // Guardar información del usuario en localStorage
-      localStorage.setItem("userId", data.userId)
-      localStorage.setItem("role", data.role)
-      localStorage.setItem("status", data.status)
+      // CORREGIDO: Guardar con las claves correctas que espera authUtils.js
       localStorage.setItem("token", data.token)
+      localStorage.setItem("role", data.role)
+      localStorage.setItem("userId", data.userId)
+      localStorage.setItem("status", data.status)
+
+      console.log("Token guardado:", localStorage.getItem("token"))
+      console.log("Rol guardado:", localStorage.getItem("role"))
+
+      // Validar estado de aprobación
+      if (data.status !== "approved") {
+        throw new Error("Cuenta pendiente de aprobación")
+      }
 
       // Redirigir según el rol
-      if (data.role === "admin") {
-        navigate("/admin/dashboard")
-      } else {
-        navigate("/dashboard")
-      }
+      const redirectPath = data.role === "admin" ? "/admin/dashboard" : "/dashboard"
+      console.log("Redirigiendo a:", redirectPath)
+
+      // Usar window.location para una redirección forzada
+      window.location.href = redirectPath
     } catch (err) {
+      console.error("Error durante el login:", err)
       setError(err.message || "Error al iniciar sesión")
     } finally {
       setLoading(false)
@@ -75,13 +74,13 @@ export default function LoginForm() {
 
       <form onSubmit={handleSubmit} className="auth-form">
         <legend>Ingresa tus credenciales</legend>
-
         <input
           type="text"
           name="emailOrUsername"
           value={formData.emailOrUsername}
           onChange={handleChange}
           placeholder="Email o nombre de usuario"
+          autoComplete="username"
           required
         />
 
@@ -91,6 +90,7 @@ export default function LoginForm() {
           value={formData.password}
           onChange={handleChange}
           placeholder="Contraseña"
+          autoComplete="current-password"
           required
         />
 

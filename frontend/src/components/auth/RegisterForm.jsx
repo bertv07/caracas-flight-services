@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "../../styles/auth.css"
+import { authService } from "../services/authServices" // Nueva ruta del servicio
 
 export default function RegisterForm() {
   const navigate = useNavigate()
@@ -30,7 +31,6 @@ export default function RegisterForm() {
     e.preventDefault()
     setError("")
 
-    // Validar que las contraseñas coincidan
     if (formData.password !== formData.confirmPassword) {
       setError("Las contraseñas no coinciden")
       return
@@ -40,23 +40,7 @@ export default function RegisterForm() {
 
     try {
       const { confirmPassword, ...dataToSend } = formData
-
-      // Llamada directa a tu API de backend
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dataToSend),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        throw new Error(data.error || "Error al registrar usuario")
-      }
-
-      // Redirigir al login con mensaje de éxito
+      await authService.register(dataToSend)
       navigate("/login?registered=true")
     } catch (err) {
       setError(err.message || "Error al registrar usuario")
@@ -102,7 +86,6 @@ export default function RegisterForm() {
           name="dateOfBirth"
           value={formData.dateOfBirth}
           onChange={handleChange}
-          placeholder="Fecha de nacimiento"
           required
         />
 
@@ -142,11 +125,9 @@ export default function RegisterForm() {
           required
         />
 
-        <div className="auth-form-row" style={{ justifyContent: "center" }}>
-          <button type="submit" className="auth-button" disabled={loading}>
-            {loading ? "Procesando..." : "Registrarse"}
-          </button>
-        </div>
+        <button type="submit" className="auth-button" disabled={loading}>
+          {loading ? "Procesando..." : "Registrarse"}
+        </button>
       </form>
 
       <div className="auth-footer">
@@ -155,4 +136,3 @@ export default function RegisterForm() {
     </div>
   )
 }
-

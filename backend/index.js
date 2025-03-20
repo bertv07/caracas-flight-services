@@ -15,11 +15,11 @@ const host = process.env.HOST;
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json());
 app.use(cors({
-    origin: process.env.ORIGIN,
+    origin: 'http://localhost:5173', // Reemplaza con tu URL de frontend
     methods: 'GET,POST,PUT,DELETE',
-    allowedHeaders: ['Content-Type'],
+    allowedHeaders: ['Content-Type', 'Authorization'], // <- Agrega Authorization
     credentials: true
-}));
+  }));
 app.use(cookieParser());
 
 // Configuración de Sequelize
@@ -56,18 +56,23 @@ sequelize.sync().then(() => {
     console.error('Error al sincronizar las tablas:', error);
 });
 
-// Importar controladores (routers)
-const userRoutes = require('./controllers/user');
+// ... (configuraciones previas iguales)
+
+// Importar controladores (routers) - MODIFICADO
+const authRoutes = require('./controllers/user'); // Nuevo
+const userRoutes = require('./controllers/user'); // ¿Este es otro archivo? Revisa nombres
 const documentsRoutes = require('./controllers/documents');
 const serviceRoutes = require('./controllers/services');
 const subscriptionRoutes = require('./controllers/subscription');
 
-// Rutas
+// Rutas - MODIFICADO
+app.use('/api/auth', authRoutes); // Nueva línea para autenticación
 app.use('/api/users', userRoutes);
 app.use('/api/documents', documentsRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 
+// ... (resto del código igual)
 // Ruta de prueba
 app.get('/', (req, res) => {
     res.send('¡Bienvenido a la API de Caracas Flight Services!');

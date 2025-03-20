@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import LogoutButton from "../auth/LogoutButton"
+import LogoutButton from "../components/auth/LogoutButton"
 
 export default function AdminDashboard() {
   const [users, setUsers] = useState([])

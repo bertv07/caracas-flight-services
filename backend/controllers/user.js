@@ -67,7 +67,7 @@ router.post('/login', async (req, res) => {
 
             // Establecer el token en una cookie
             res.cookie('token', token, { httpOnly: true, path: '/' });
-
+            console.log("inicio se sesion")
             // Devolver el token y la información del usuario
             res.json({ 
                 token, 

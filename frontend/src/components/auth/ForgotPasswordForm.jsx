@@ -2,7 +2,10 @@
 
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import "../styles/auth.css"
+import "../../styles/auth.css"
+
+// Importar el servicio de autenticación
+import { authService } from "../services/authServices" // Nueva ruta del servicio
 
 export default function ForgotPasswordForm() {
   const [email, setEmail] = useState("")
@@ -10,26 +13,15 @@ export default function ForgotPasswordForm() {
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  // Reemplazar la función handleSubmit con esta versión que usa el servicio
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError("")
     setLoading(true)
 
     try {
-      // Llamada directa a tu API de backend
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/forgot-password`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      })
-
-      if (!response.ok) {
-        const data = await response.json()
-        throw new Error(data.error || "Error al procesar la solicitud")
-      }
-
+      // Usar el servicio de autenticación
+      await authService.forgotPassword(email)
       setSuccess(true)
     } catch (err) {
       setError(err.message || "Error al procesar la solicitud")
