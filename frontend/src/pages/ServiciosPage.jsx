@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import "../styles/auth.css"
+import NavBar from "../components/auth/navBarAuth"
 
 export default function ServiciosPage() {
   const [activeTab, setActiveTab] = useState("todos")
@@ -62,8 +63,9 @@ export default function ServiciosPage() {
     activeTab === "todos" ? servicios : servicios.filter((servicio) => servicio.categoria === activeTab)
 
   return (
-    <div style={{ padding: "80px 20px 40px 20px", backgroundColor: "#f5f5f5", minHeight: "100vh" }}>
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
+    <div>
+      <NavBar></NavBar>
+      <div className="cont-ser" style={{ maxWidth: "1200px", margin: "0 auto" }}>
         <h1
           style={{
             fontSize: "3rem",

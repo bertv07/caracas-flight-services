@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { getUserId, getUserRole, getUserStatus } from "../utils/authUtils"
 import LogoutButton from "../auth/LogoutButton"
+import NavBar from "../components/auth/navBarAuth"
 
 
 export default function Dashboard() {
@@ -14,6 +15,7 @@ export default function Dashboard() {
 
   return (
     <div style={{ padding: "2rem" }}>
+      <NavBar />
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
         <h1>Dashboard de Usuario</h1>
         <LogoutButton />

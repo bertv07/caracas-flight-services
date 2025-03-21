@@ -64,6 +64,8 @@ const userRoutes = require('./controllers/user'); // ¿Este es otro archivo? Rev
 const documentsRoutes = require('./controllers/documents');
 const serviceRoutes = require('./controllers/services');
 const subscriptionRoutes = require('./controllers/subscription');
+const adminRoutes = require('./controllers/user'); // Si decides usar un controlador específico para administración
+
 
 // Rutas - MODIFICADO
 app.use('/api/auth', authRoutes); // Nueva línea para autenticación
@@ -71,8 +73,8 @@ app.use('/api/users', userRoutes);
 app.use('/api/documents', documentsRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
+app.use('/admin/users', adminRoutes);
 
-// ... (resto del código igual)
 // Ruta de prueba
 app.get('/', (req, res) => {
     res.send('¡Bienvenido a la API de Caracas Flight Services!');

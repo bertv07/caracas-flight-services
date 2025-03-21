@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { getUserId } from "../../utils/authUtils"
-import "../../styles/auth.css"
+import { useState, useEffect } from "react";
+import { getUserId } from "../../utils/authUtils";
+import "../../styles/auth.css";
 
 export default function EditProfileForm() {
   const [formData, setFormData] = useState({
@@ -11,89 +11,103 @@ export default function EditProfileForm() {
     dateOfBirth: "",
     email: "",
     username: "",
-  })
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [initialLoading, setInitialLoading] = useState(true)
+  });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userId = getUserId()
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/${userId}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
+        const userId = getUserId(); // Obtiene el ID del usuario
+        console.log("Obteniendo datos para el ID de usuario:", userId);
+
+        const response = await fetch(
+          `http://localhost:3000/api/users/users/${userId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
 
         if (!response.ok) {
-          throw new Error("Error al obtener datos del usuario")
+          if (response.status === 404) {
+            throw new Error("Usuario no encontrado");
+          } else {
+            throw new Error("Error al obtener datos del usuario");
+          }
         }
 
-        const userData = await response.json()
+        const userData = await response.json();
         setFormData({
           firstName: userData.firstName || "",
           lastName: userData.lastName || "",
-          dateOfBirth: userData.dateOfBirth ? userData.dateOfBirth.split("T")[0] : "",
+          dateOfBirth: userData.dateOfBirth
+            ? userData.dateOfBirth.split("T")[0]
+            : "",
           email: userData.email || "",
           username: userData.username || "",
-        })
+        });
       } catch (err) {
-        setError(err.message || "Error al cargar datos del usuario")
+        setError(err.message || "Error al cargar datos del usuario");
       } finally {
-        setInitialLoading(false)
+        setInitialLoading(false);
       }
-    }
+    };
 
-    fetchUserData()
-  }, [])
+    fetchUserData();
+  }, []);
 
   const handleChange = (e) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError("")
-    setSuccess(false)
-    setLoading(true)
+    e.preventDefault();
+    setError("");
+    setSuccess(false);
+    setLoading(true);
 
     try {
-      const userId = getUserId()
+      const userId = getUserId();
 
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/edit-profile`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({
-          userId,
-          ...formData,
-        }),
-      })
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/edit-profile`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            userId,
+            ...formData,
+          }),
+        }
+      );
 
-      const data = await response.json()
+      const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Error al actualizar el perfil")
+        throw new Error(data.error || "Error al actualizar el perfil");
       }
 
-      setSuccess(true)
+      setSuccess(true);
     } catch (err) {
-      setError(err.message || "Error al actualizar el perfil")
+      setError(err.message || "Error al actualizar el perfil");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   if (initialLoading) {
-    return <div className="loading">Cargando datos del perfil...</div>
+    return <div className="loading">Cargando datos del perfil...</div>;
   }
 
   return (
@@ -129,7 +143,14 @@ export default function EditProfileForm() {
 
         <div className="form-group">
           <label htmlFor="lastName">Apellido</label>
-          <input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={handleChange} required />
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+            required
+          />
         </div>
 
         <div className="form-group">
@@ -146,12 +167,26 @@ export default function EditProfileForm() {
 
         <div className="form-group">
           <label htmlFor="email">Correo Electrónico</label>
-          <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="username">Nombre de Usuario</label>
-          <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} required />
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
         </div>
 
         <button type="submit" className="auth-button" disabled={loading}>
@@ -159,6 +194,5 @@ export default function EditProfileForm() {
         </button>
       </form>
     </div>
-  )
+  );
 }
-

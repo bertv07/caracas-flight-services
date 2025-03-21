@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import LogoutButton from "../components/auth/LogoutButton"
+import NavBar from "../components/auth/navBarAuth"
 
 export default function AdminDashboard() {
   const [users, setUsers] = useState([])
@@ -12,10 +13,10 @@ export default function AdminDashboard() {
     const fetchUsers = async () => {
       try {
         // Aquí deberías tener un endpoint para obtener todos los usuarios
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/admin/users`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+        const response = await fetch(`http://localhost:3000/admin/users/admin/users`, {
+          // headers: {
+          //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+          // },
         })
 
         if (!response.ok) {
@@ -35,13 +36,14 @@ export default function AdminDashboard() {
   }, [])
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div >
+      <NavBar></NavBar>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
         <h1>Panel de Administración</h1>
         <LogoutButton />
       </div>
 
-      <div
+      <div className="cont"
         style={{
           backgroundColor: "white",
           padding: "2rem",

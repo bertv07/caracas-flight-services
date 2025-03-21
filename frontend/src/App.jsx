@@ -75,6 +75,7 @@ const HomePage = () => {
 
   return (
     <main>
+      <BarraNavegacion />
       <SeccionPrincipal />
       <SeccionServicios />
       <CarruselLogos />
@@ -89,7 +90,6 @@ const HomePage = () => {
 export default function App() {
   return (
     <Router>
-      <BarraNavegacion />
       <Routes>
         {/* Ruta principal */}
         <Route path="/" element={<HomePage />} />

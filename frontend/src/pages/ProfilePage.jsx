@@ -8,6 +8,7 @@ import DocumentsUpload from "../components/documents/DocumentsUpload"
 import SubscriptionsList from "../components/subscriptions/SubscriptionsList"
 import LogoutButton from "../components/auth/LogoutButton"
 import "../styles/profile.css"
+import NavBar from "../components/auth/navBarAuth"
 
 export default function ProfilePage() {
   const [activeTab, setActiveTab] = useState("profile")
@@ -15,6 +16,7 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-container">
+      <NavBar />
       <div className="profile-sidebar">
         <h2>Mi Cuenta</h2>
         <ul className="profile-nav">

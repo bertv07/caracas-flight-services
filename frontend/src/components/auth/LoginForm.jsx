@@ -48,7 +48,7 @@ export default function LoginForm() {
       }
 
       // Redirigir según el rol
-      const redirectPath = data.role === "admin" ? "/admin/dashboard" : "/dashboard"
+      const redirectPath = data.role === "admin" ? "/servicios" : "/servicios"
       console.log("Redirigiendo a:", redirectPath)
 
       // Usar window.location para una redirección forzada

@@ -19,6 +19,21 @@ body {
   overflow-x: hidden;
 }
 
+.nav-container1{
+  position: fixed;
+  background-color: var(--color-green);
+  margin: 0;
+}
+.nav-bar1{
+  background-color: var(--color-green);
+  z-index: 5;
+  position: fixed;
+  top: 0;
+  height: 9rem;
+  width: 99.3vw;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
 .auth-container {
   min-height: 100vh;
   display: flex;
@@ -27,6 +42,9 @@ body {
   justify-content: center;
   background-color: var(--background-black);
   padding: 1rem;
+}
+.cont{
+  margin-top: 8rem;
 }
 
 .auth-title {
@@ -45,6 +63,15 @@ body {
   background-color: var(--color-green);
 }
 
+.ff-00-1{
+  margin-top: 2rem;
+}
+.lg{
+  margin-top: 1rem;
+}
+.cont-ser{
+  margin-top: 10rem !important;
+}
 .auth-form legend {
   text-align: center;
   margin: 1rem;
