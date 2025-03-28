@@ -40,13 +40,14 @@ export default function BarraNavegacion() {
         </div>
 
         <div className="pags nav-list">
-          <Link to="/#contacto" className="ff-00 resp">
+
+          <Link to="/contacto" className="ff-00 resp">
             Contáctanos
           </Link>
-          <Link to="/#ubicacion" className="ff-00">
+          <Link to="/ubicacion" className="ff-00">
             Ubicación
           </Link>
-          <Link to="/#nosotros" className="ff-00">
+          <Link to="/acerca-de" className="ff-00">
             Acerca de
           </Link>
           <Link to="/servicios" className="ff-00">

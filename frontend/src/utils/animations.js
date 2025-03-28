@@ -487,6 +487,8 @@ export const initAnimations = () => {
   )
 }
 
+
+
 // Función para animar los slides de servicios
 export const animateServiceSlides = () => {
   if (typeof window === "undefined") return

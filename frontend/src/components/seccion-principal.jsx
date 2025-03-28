@@ -16,7 +16,10 @@ export default function SeccionPrincipal() {
             </p>
           </div>
           <div className="boton-1">
-            <button>Contáctanos</button>
+            <button><a href="/contacto">
+              Contáctanos
+            </a>
+              </button>
           </div>
         </div>
       </div>

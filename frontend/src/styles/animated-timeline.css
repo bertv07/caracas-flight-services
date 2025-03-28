@@ -1,0 +1,265 @@
+.animated-timeline {
+  position: relative;
+  width: 100%;
+  height: 150vh;
+  margin: 0px 0;
+  overflow: hidden;
+}
+
+.timeline-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-svg {
+  position: absolute;
+  width: 100%;
+  height: 110%;
+  top: -6rem;
+  left: 0;
+}
+
+.timeline-item-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.timeline-dot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-green);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px white, 0 0 0 6px rgba(0, 128, 0, 0.3);
+  opacity: 0;
+}
+
+.timeline-year {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-green);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.timeline-content {
+  position: absolute;
+  width: 250px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.timeline-content h3 {
+  color: var(--color-green);
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.timeline-content p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .animated-timeline {
+    height: 1200px;
+  }
+
+  .timeline-content {
+    width: 200px;
+    left: 50% !important;
+    top: calc(var(--top) + 40px) !important;
+  }
+
+  .timeline-dot {
+    left: 50% !important;
+  }
+}
+
+.timeline-content-{
+  left: 100px !important;
+}
+
+.animated-timeline {
+  position: relative;
+  width: 100%;
+  height: 150vh;
+  margin: 0;
+  overflow: hidden;
+}
+
+.timeline-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+
+.timeline-path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.timeline-item-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.timeline-dot {
+  --dot-position: 50%;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: var(--color-green);
+  border-radius: 50%;
+  left: 50%;
+  top: var(--dot-position);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  cursor: pointer;
+  box-shadow: 0 0 0 4px white, 0 0 0 6px rgba(0, 128, 0, 0.3);
+  opacity: 0;
+}
+
+.timeline-year {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-green);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.timeline-content {
+  --offset-x: calc(var(--content-side, 1) * 160px);
+  --vertical-position: 50%;
+  position: absolute;
+  width: 250px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  left: calc(50% + var(--offset-x));
+  top: var(--vertical-position);
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0;
+}
+
+.timeline-content h3 {
+  color: var(--color-green);
+  margin-bottom: 8px;
+  font-size: 1.1rem;
+}
+
+.timeline-content p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .animated-timeline {
+    height: 1200px;
+  }
+
+  .timeline-content {
+    --offset-x: 0 !important;
+    width: 80%;
+    left: 50% !important;
+    top: calc(var(--vertical-position) + 60px) !important;
+  }
+
+  .timeline-dot {
+    left: 50% !important;
+  }
+}
+
+
+
+.timeline-content-1, .timeline-content-3, .timeline-content-5 {
+  border-left: 3px solid var(--color-green);
+}
+
+.timeline-content-0, .timeline-content-2, .timeline-content-4 {
+  border-right: 3px solid var(--color-green);
+}
+
+
+
+/* Añadir estas transiciones */
+.timeline-dot {
+  opacity: 0;
+}
+
+.timeline-dot-1 {
+  margin-left: 2% !important;
+}
+
+.timeline-dot-2 {
+  margin-left: -4.5% !important;
+}
+
+.timeline-dot-3 {
+  margin-left: 4% !important;
+}
+.timeline-dot-4 {
+  margin-left: -7.5% !important;
+}
+
+.timeline-dot-5 {
+  margin-top: -4% !important;
+}
+.timeline-content-5 {
+  margin-top: -4% !important;
+  margin-left: -5% !important;
+}
+
+
+
+
+.timeline-content {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Optimización para scroll suave */
+.animated-timeline {
+  scroll-behavior: smooth;
+}
+
+/* Mejoras en la curva del path */
+.timeline-path {
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+

@@ -22,6 +22,11 @@ import ProfilePage from "./pages/ProfilePage"
 import AdminDashboard from "./pages/AdminDashboard"
 import ServiciosPage from "./pages/ServiciosPage"
 
+// Nuevas páginas
+import ContactoPage from "./pages/ContactoPage"
+import UbicacionPage from "./pages/UbicacionPage"
+import AcercaDePage from "./pages/AcercaDePage"
+
 // Estilos y utilidades
 import "./assets/css/responsive.css"
 import { initAnimations, cleanupAnimations, createResponsiveTriggers } from "./utils/animations"
@@ -101,6 +106,11 @@ export default function App() {
 
         {/* Ruta de servicios */}
         <Route path="/servicios" element={<ServiciosPage />} />
+
+        {/* Nuevas rutas */}
+        <Route path="/contacto" element={<ContactoPage />} />
+        <Route path="/ubicacion" element={<UbicacionPage />} />
+        <Route path="/acerca-de" element={<AcercaDePage />} />
 
         {/* Rutas protegidas */}
         <Route

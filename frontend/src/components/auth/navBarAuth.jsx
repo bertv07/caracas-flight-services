@@ -4,7 +4,6 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import logo from "../../assets/img/logo.png"
 import { isAuthenticated, getUserRole } from "../../utils/authUtils"
-import "../../styles/auth.css"
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
@@ -38,13 +37,16 @@ export default function NavBar() {
         </div>
 
         <div className="pags nav-list">
-          <Link to="/#contacto" className="ff-00-1 resp">
+          <Link to="/" className="ff-00-1 resp">
+            Home
+          </Link>
+          <Link to="/contacto" className="ff-00-1 resp">
             Contáctanos
           </Link>
-          <Link to="/#ubicacion" className="ff-00-1">
+          <Link to="/ubicacion" className="ff-00-1">
             Ubicación
           </Link>
-          <Link to="/#nosotros" className="ff-00-1">
+          <Link to="/acerca-de" className="ff-00-1">
             Acerca de
           </Link>
           <a href="#" onClick={handleProgramasClick} className="ff-00-1">

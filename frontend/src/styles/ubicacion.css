@@ -1,0 +1,263 @@
+.ubicacion-page {
+  font-family: Arial, sans-serif;
+  color: #333;
+  margin-top: 9rem;
+}
+
+.ubicacion-container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.ubicacion-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab-button {
+  padding: 15px 30px;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.tab-button:after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-green);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.tab-button.active {
+  color: var(--color-green);
+}
+
+.tab-button.active:after {
+  transform: scaleX(1);
+}
+
+.tab-content {
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tab-content h2 {
+  color: var(--color-green);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.ubicacion-descripcion {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+  color: #666;
+  font-weight: 700;
+}
+
+.mapa-grande {
+  margin-bottom: 30px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.info-aeropuerto {
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.info-aeropuerto h3 {
+  color: var(--color-green);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.info-aeropuerto p {
+  font-weight: 600;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-left: 3rem;
+}
+
+.info-item {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.info-item h4 {
+  color: var(--color-green);
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+.direcciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.direccion-item {
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.direccion-item h3 {
+  color: var(--color-green);
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.direccion-item ol {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.direccion-item li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+.direccion-item p {
+  font-weight: 600;
+  color: #666;
+}
+
+.transporte h3 {
+  color: var(--color-green);
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.transporte-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.transporte-item {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.transporte-item h4 {
+  color: var(--color-green);
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+.transporte-item p{
+  font-weight: 600;
+}
+
+.instalaciones-descripcion {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+  color: #666;
+}
+
+.instalaciones-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+.instalacion-item {
+  display: flex;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.instalacion-imagen {
+  flex: 0 0 40%;
+}
+
+.instalacion-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.instalacion-info {
+  flex: 1;
+  padding: 25px;
+}
+
+.instalacion-info h3 {
+  color: var(--color-green);
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.instalacion-info p {
+  line-height: 1.6;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .ubicacion-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-button {
+    flex: 1 0 auto;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+
+  .direcciones {
+    grid-template-columns: 1fr;
+  }
+
+  .instalacion-item {
+    flex-direction: column;
+  }
+
+  .instalacion-imagen {
+    flex: 0 0 200px;
+  }
+
+  .ubicacion-hero-content h1 {
+    font-size: 2.5rem;
+  }
+}
+

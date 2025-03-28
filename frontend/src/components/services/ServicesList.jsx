@@ -23,33 +23,96 @@ export default function ServicesList() {
   const navigate = useNavigate()
   const isUserAuthenticated = isAuthenticated()
 
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/services`)
+  // Servicios de aeronaves predefinidos que coinciden con el modelo del backend
+  const defaultServices = [
+    {
+      id: 1,
+      name: "Servicio Básico: Asistencia Esencial",
+      description:
+        "Incluye abastecimiento de combustible, estacionamiento en rampa para aeronaves, acceso a sala VIP básica para pasajeros, y servicios de agua potable y limpieza básica de aeronaves.",
+      price: 300,
+      category: "basico",
+    },
+    {
+      id: 2,
+      name: "Servicio Intermedio: Experiencia Mejorada",
+      description:
+        "Incluye todo lo del servicio básico, hangaraje para protección de aeronaves, catering estándar para pasajeros y tripulación, coordinación de permisos de vuelo y planificación básica, y transporte terrestre (limusina o taxi) para pasajeros.",
+      price: 700,
+      category: "intermedio",
+    },
+    {
+      id: 3,
+      name: "Servicio Premium: Lujo Integral",
+      description:
+        "Incluye todo lo del servicio intermedio, sala VIP de lujo con servicios personalizados, catering gourmet y bebidas premium, asistencia completa para tripulación, servicios de mantenimiento preventivo para aeronaves, y gestión de vuelos internacionales (aduanas y migración).",
+      price: 1500,
+      category: "premium",
+    },
+    {
+      id: 4,
+      name: "Servicio Ejecutivo: Solución Corporativa",
+      description:
+        "Diseñado específicamente para viajes de negocios. Incluye todo lo del servicio premium, más sala de conferencias privada, servicios de secretariado y traducción, conectividad de alta velocidad, coordinación de reuniones en destino y transporte ejecutivo para todo el equipo.",
+      price: 2200,
+      category: "ejecutivo",
+    },
+  ]
 
-        if (!response.ok) {
-          throw new Error("Error al obtener servicios")
+  // Función para inicializar los servicios en la base de datos si no existen
+  const initializeServices = async () => {
+    try {
+      // Verificamos si ya existen servicios
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/services`)
+
+      if (!response.ok) {
+        throw new Error("Error al obtener servicios")
+      }
+
+      const existingServices = await response.json()
+
+      // Si no hay servicios, creamos los predefinidos
+      if (existingServices.length === 0) {
+        for (const service of defaultServices) {
+          await fetch(`${import.meta.env.VITE_API_URL}/services`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+            body: JSON.stringify({
+              name: service.name,
+              description: service.description,
+              price: service.price,
+            }),
+          })
         }
 
-        const data = await response.json()
-        setServices(data)
-      } catch (err) {
-        setError(err.message || "Error al cargar servicios")
-      } finally {
-        setLoading(false)
+        // Volvemos a cargar los servicios después de crearlos
+        const newResponse = await fetch(`${import.meta.env.VITE_API_URL}/services`)
+        if (newResponse.ok) {
+          const newServices = await newResponse.json()
+          setServices(newServices)
+        }
+      } else {
+        // Si ya existen servicios, los usamos
+        setServices(existingServices)
       }
+    } catch (error) {
+      console.error("Error al inicializar servicios:", error)
+      setError("Error al cargar servicios")
+      // En caso de error, usamos los servicios predefinidos
+      setServices(defaultServices)
+    } finally {
+      setLoading(false)
     }
+  }
 
-    fetchServices()
+  useEffect(() => {
+    initializeServices()
   }, [])
 
   const handleSubscribe = (service) => {
-    if (!isUserAuthenticated) {
-      navigate("/login")
-      return
-    }
-
     setSelectedService(service)
     setShowSubscriptionForm(true)
   }
@@ -80,7 +143,9 @@ export default function ServicesList() {
         body: JSON.stringify({
           userId,
           serviceId: selectedService.id,
-          ...subscriptionData,
+          frequency: subscriptionData.frequency,
+          startDate: subscriptionData.startDate,
+          endDate: subscriptionData.endDate,
         }),
       })
 
@@ -108,7 +173,7 @@ export default function ServicesList() {
 
   return (
     <div className="services-container">
-      <h1>Nuestros Servicios</h1>
+      <h1>Nuestros Servicios para Aeronaves</h1>
 
       {error && (
         <div className="alert alert-error">
@@ -122,7 +187,7 @@ export default function ServicesList() {
           <div key={service.id} className="service-card">
             <h3>{service.name}</h3>
             <p className="service-description">{service.description}</p>
-            <p className="service-price">${service.price}</p>
+            <p className="service-price">USD ${service.price}</p>
             <button className="subscribe-button" onClick={() => handleSubscribe(service)}>
               Suscribirse
             </button>
@@ -200,7 +265,7 @@ export default function ServicesList() {
                   <strong>Servicio:</strong> {selectedService.name}
                 </p>
                 <p>
-                  <strong>Precio:</strong> ${selectedService.price}
+                  <strong>Precio:</strong> USD ${selectedService.price}
                 </p>
               </div>
 

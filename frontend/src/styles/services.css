@@ -1,119 +1,185 @@
-.services-container {
+/* Estilos para la página de servicios */
+.cont-ser {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 80px 20px 40px 20px;
+  padding: 20px;
 }
 
-.services-container h1 {
-  font-size: 2.5rem;
+.services-title {
+  font-size: 3rem;
   color: var(--color-green);
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 40px;
   font-weight: 300;
 }
 
+/* Tabs de filtrado */
+.filter-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  padding: 10px 20px;
+  background-color: white;
+  color: var(--color-green);
+  border: 2px solid var(--color-green);
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.filter-tab.active {
+  background-color: var(--color-green);
+  color: white;
+}
+
+/* Grid de servicios */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
 }
 
-.service-card {
+.service-card1 {
   background-color: white;
-  border-radius: 10px;
-  padding: 1.5rem;
+  border-radius: 15px;
+  overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
-.service-card:hover {
+.service-card1:hover {
   transform: translateY(-10px);
 }
 
-.service-card h3 {
+.service-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.service-content {
+  padding: 20px;
+}
+
+.service-title {
   color: var(--color-green);
-  margin-bottom: 1rem;
   font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: 600;
 }
 
 .service-description {
-  color: #666;
-  margin-bottom: 1.5rem;
+  color: #555;
+  margin-bottom: 15px;
   line-height: 1.6;
 }
 
-.service-price {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--color-green);
-  margin-bottom: 1.5rem;
+.service-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.subscribe-button {
-  width: 100%;
-  padding: 0.8rem;
+.service-price {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.service-button {
   background-color: var(--color-green);
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  padding: 8px 15px;
+  border-radius: 30px;
+  text-decoration: none;
   font-weight: 600;
+  font-size: 0.9rem;
   transition: background-color 0.3s ease;
 }
 
-.subscribe-button:hover {
+.service-button:hover {
   background-color: var(--green-button-hover);
 }
 
-.subscription-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+/* CTA */
+.cta-container {
+  background-color: var(--color-green);
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+}
+
+.cta-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+.cta-description {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  max-width: 700px;
+  margin: 0 auto 30px auto;
+}
+
+.cta-buttons {
   display: flex;
   justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.subscription-modal-content {
+.cta-button {
+  padding: 12px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  border: 2px solid white;
+}
+
+.cta-button.primary {
   background-color: white;
-  border-radius: 10px;
-  padding: 2rem;
-  width: 90%;
-  max-width: 500px;
-  position: relative;
-  max-height: 90vh;
-  overflow-y: auto;
+  color: var(--color-green);
 }
 
-.close-modal {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #666;
+.cta-button.primary:hover {
+  background-color: transparent;
+  color: white;
 }
 
-.subscription-form {
-  margin-top: 1.5rem;
+.cta-button.secondary {
+  background-color: transparent;
+  color: white;
 }
 
-.subscription-summary {
-  margin: 1.5rem 0;
-  padding: 1rem;
-  background-color: #f9f9f9;
-  border-radius: 5px;
+.cta-button.secondary:hover {
+  background-color: white;
+  color: var(--color-green);
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .services-grid {
     grid-template-columns: 1fr;
+  }
+
+  .services-title {
+    font-size: 2.5rem;
+  }
+
+  .cta-title {
+    font-size: 1.8rem;
   }
 }
 

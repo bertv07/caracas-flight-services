@@ -29,7 +29,7 @@ body {
   z-index: 5;
   position: fixed;
   top: 0;
-  height: 9rem;
+  height: 7rem;
   width: 99.3vw;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -64,10 +64,11 @@ body {
 }
 
 .ff-00-1{
-  margin-top: 2rem;
+  margin-top: 0rem;
+  color: #fef2f2 !important;
 }
 .lg{
-  margin-top: 1rem;
+  margin-top: 0rem;
 }
 .cont-ser{
   margin-top: 10rem !important;

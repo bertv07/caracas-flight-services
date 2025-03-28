@@ -1,3 +1,8 @@
+@media (min-width: 1800px) {
+  .fondo-carruzel{
+    height: 500px;
+  }
+}
 @media (max-width: 1800px) {
   .fondo-carruzel {
     width: 90%;

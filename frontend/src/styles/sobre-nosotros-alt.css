@@ -1,0 +1,426 @@
+.sobre-nosotros-alt {
+  padding: 80px 0;
+  margin-top: 10rem;
+}
+
+p{
+  font-weight: 600;
+}
+
+.sobre-nosotros-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.sobre-nosotros-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.sobre-nosotros-title {
+  font-size: 2.5rem;
+  color: var(--color-green);
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.sobre-nosotros-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.sobre-nosotros-content {
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.sobre-nosotros-tabs {
+  display: flex;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 15px 10px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.tab-btn:hover {
+  background-color: #e9e9e9;
+  color: var(--color-green);
+}
+
+.tab-btn.active {
+  background-color: white;
+  color: var(--color-green);
+  border-top: 3px solid var(--color-green);
+  margin-top: -3px;
+}
+
+.tab-content-container {
+  padding: 40px;
+}
+
+/* Historia Tab */
+.historia-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.historia-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.historia-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.historia-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.historia-text h3 {
+  color: var(--color-green);
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.historia-text p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Equipo Tab */
+.equipo-content h3 {
+  color: var(--color-green);
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.equipo-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.equipo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.equipo-member {
+  text-align: center;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.equipo-member:hover {
+  transform: translateY(-5px);
+}
+
+.member-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 15px;
+  border: 3px solid var(--color-green);
+}
+
+.member-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.equipo-member h4 {
+  color: var(--color-green);
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+}
+
+.member-position {
+  color: #888;
+  font-style: italic;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.member-description {
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.equipo-stats {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  background-color: var(--color-green);
+  padding: 30px;
+  border-radius: 10px;
+  color: white;
+  margin-top: 30px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 0 15px;
+  margin: 10px 0;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+}
+
+/* Logros Tab */
+.logros-content h3 {
+  color: var(--color-green);
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.logros-timeline {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.logros-timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 120px;
+  width: 3px;
+  background-color: var(--color-green);
+}
+
+.logro-item {
+  position: relative;
+  padding-left: 150px;
+  margin-bottom: 40px;
+}
+
+.logro-year {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100px;
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-green);
+}
+
+.logro-content {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+
+.logro-content::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border: 3px solid var(--color-green);
+  border-radius: 50%;
+}
+
+.logro-content h4 {
+  color: var(--color-green);
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.logro-content p {
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Futuro Tab */
+.futuro-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.futuro-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.futuro-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.futuro-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.futuro-text h3 {
+  color: var(--color-green);
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.futuro-text > p {
+  margin-bottom: 25px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.futuro-pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.pillar-item {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.pillar-icon {
+  width: 60px;
+  height: 60px;
+  background-color: var(--color-green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin: 0 auto 15px;
+}
+
+.pillar-item h4 {
+  color: var(--color-green);
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.pillar-item p {
+  color: #555;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.futuro-closing {
+  font-style: italic;
+  color: #666;
+  margin-top: 25px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sobre-nosotros-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    flex: 1 0 50%;
+    font-size: 0.9rem;
+  }
+
+  .tab-content-container {
+    padding: 25px;
+  }
+
+  .logros-timeline::before {
+    left: 80px;
+  }
+
+  .logro-item {
+    padding-left: 100px;
+  }
+
+  .logro-year {
+    width: 70px;
+    font-size: 1.2rem;
+  }
+
+  .sobre-nosotros-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tab-btn {
+    flex: 1 0 100%;
+  }
+
+  .logros-timeline::before {
+    display: none;
+  }
+
+  .logro-item {
+    padding-left: 0;
+    margin-bottom: 30px;
+  }
+
+  .logro-year {
+    position: static;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  .logro-content::before {
+    display: none;
+  }
+}
+

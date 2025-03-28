@@ -1,0 +1,231 @@
+.nuestro-compromiso {
+  padding: 80px 0;
+  background-color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+
+.nuestro-compromiso::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background-color: rgba(var(--color-green-rgb), 0.05);
+  border-radius: 50%;
+  transform: translate(150px, -150px);
+  z-index: 0;
+}
+
+.nuestro-compromiso::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 400px;
+  height: 400px;
+  background-color: rgba(var(--color-green-rgb), 0.05);
+  border-radius: 50%;
+  transform: translate(-200px, 200px);
+  z-index: 0;
+}
+
+.compromiso-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.compromiso-header {
+  text-align: center;
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.nuestro-compromiso.animate .compromiso-header {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.compromiso-title {
+  font-size: 2.5rem;
+  color: var(--color-green);
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.compromiso-subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.compromiso-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.compromiso-item {
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.3s ease;
+}
+
+.compromiso-item.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.compromiso-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.compromiso-icon {
+  width: 70px;
+  height: 70px;
+  background-color: var(--color-green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.compromiso-item h3 {
+  color: var(--color-green);
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.compromiso-item p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.compromiso-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.compromiso-list li {
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+.compromiso-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-green);
+  font-weight: bold;
+}
+
+.compromiso-cta {
+  background-color: #f9f9f9;
+  border-radius: 15px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.nuestro-compromiso.animate .compromiso-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.compromiso-cta h3 {
+  color: var(--color-green);
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.compromiso-cta p {
+  color: #555;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 25px;
+}
+
+.compromiso-button {
+  background-color: var(--color-green);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.compromiso-button:hover {
+  background-color: var(--green-button-hover);
+  transform: translateY(-3px);
+}
+
+/* Staggered animation for items */
+.compromiso-item:nth-child(1) {
+  transition-delay: 0.1s;
+}
+
+.compromiso-item:nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.compromiso-item:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.compromiso-item:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+.compromiso-item:nth-child(5) {
+  transition-delay: 0.5s;
+}
+
+.compromiso-item:nth-child(6) {
+  transition-delay: 0.6s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .compromiso-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .compromiso-title {
+    font-size: 2rem;
+  }
+
+  .compromiso-cta {
+    padding: 30px 20px;
+  }
+}
+
