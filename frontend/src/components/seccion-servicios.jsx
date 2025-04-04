@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { animateServiceSlides } from "../utils/animations"
-
+const mapRadar = "../assets/img/map-radar.png"
 export default function SeccionServicios() {
   const [indiceActivo, setIndiceActivo] = useState(1)
   const [esMovil, setEsMovil] = useState(false)
@@ -191,7 +191,6 @@ export default function SeccionServicios() {
         <div className="colum-one">
           <div
             className="card-nuestros-res1 car-res"
-            style={{ backgroundImage: "url(assets/img/map-radar.jpg)", backgroundSize: "cover" }}
           >
             <div className="text-crad-nuestros">
               <h3>Monitoreo de vuelo</h3>
@@ -201,7 +200,6 @@ export default function SeccionServicios() {
           </div>
           <div
             className="card-nuestros-res2 car-res"
-            style={{ backgroundImage: "url(assets/img/notams.jpg)", backgroundSize: "cover" }}
           >
             <div className="text-crad-nuestros">
               <h3>Chequeo de notams</h3>
@@ -211,7 +209,6 @@ export default function SeccionServicios() {
           </div>
           <div
             className="card-nuestros-res3 car-res"
-            style={{ backgroundImage: "url(assets/img/permisos.jpeg)", backgroundSize: "cover" }}
           >
             <div className="text-crad-nuestros">
               <h3>Contacto con el FBO</h3>
@@ -221,7 +218,6 @@ export default function SeccionServicios() {
           </div>
           <div
             className="card-nuestros-res4 car-res"
-            style={{ backgroundImage: "url(assets/img/IMG_1540.JPG)", backgroundSize: "cover" }}
           >
             <div className="text-crad-nuestros">
               <h3>Trámite de permisos sobre vuelo y aterrizaje</h3>
@@ -238,7 +234,6 @@ export default function SeccionServicios() {
           <div className="card-nuestros-res1-tlf car-res-tlf cr">
             <div
               className="fondo-ns-tlf-1"
-              style={{ backgroundImage: "url(assets/img/map-radar.jpg)", backgroundSize: "cover" }}
             >
               <div className="text-crad-nuestros-tlf s-n-1">
                 <h3>Monitoreo de vuelo</h3>
@@ -250,7 +245,6 @@ export default function SeccionServicios() {
           <div className="card-nuestros-res2-tlf car-res-tlf">
             <div
               className="fondo-ns-tlf-2"
-              style={{ backgroundImage: "url(assets/img/notams.jpg)", backgroundSize: "cover" }}
             >
               <div className="text-crad-nuestros-tlf s-n-2">
                 <h3>Chequeo de notams</h3>
@@ -262,7 +256,6 @@ export default function SeccionServicios() {
           <div className="card-nuestros-res3-tlf car-res-tlf">
             <div
               className="fondo-ns-tlf-3"
-              style={{ backgroundImage: "url(assets/img/permisos.jpeg)", backgroundSize: "cover" }}
             >
               <div className="text-crad-nuestros-tlf s-n-3">
                 <h3>Contacto con el FBO</h3>
@@ -274,7 +267,6 @@ export default function SeccionServicios() {
           <div className="card-nuestros-res4-tlf car-res-tlf">
             <div
               className="fondo-ns-tlf-4"
-              style={{ backgroundImage: "url(assets/img/IMG_1540.JPG)", backgroundSize: "cover" }}
             >
               <div className="text-crad-nuestros-tlf s-n-4">
                 <h3>Trámite de permisos sobre vuelo y aterrizaje</h3>

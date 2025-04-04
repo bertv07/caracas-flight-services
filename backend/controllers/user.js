@@ -46,7 +46,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-// Inicio de sesión de usuarios
+// En tu ruta de login
 router.post('/login', async (req, res) => {
     const { emailOrUsername, password } = req.body;
     try {
@@ -59,21 +59,28 @@ router.post('/login', async (req, res) => {
                 ]
             }
         });
-
+        
         // Verificar si el usuario existe y si la contraseña es correcta
         if (user && await bcrypt.compare(password, user.password)) {
-            // Generar un token JWT
-            const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: '1h' });
-
+            // Generar un token JWT que incluya el rol del usuario
+            const token = jwt.sign(
+                { 
+                    userId: user.id,
+                    role: user.role  // Incluir el rol en el token
+                }, 
+                SECRET_KEY, 
+                { expiresIn: '1h' }
+            );
+            
             // Establecer el token en una cookie
             res.cookie('token', token, { httpOnly: true, path: '/' });
-            console.log("inicio se sesion")
+            
             // Devolver el token y la información del usuario
-            res.json({ 
-                token, 
-                userId: user.id, 
-                role: user.role, 
-                status: user.status 
+            res.json({
+                token,
+                userId: user.id,
+                role: user.role,
+                status: user.status
             });
         } else {
             res.status(401).json({ error: 'Credenciales inválidas' });
@@ -83,6 +90,7 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Error al iniciar sesión' });
     }
 });
+
 
 // Olvido de contraseña
 router.post('/forgot-password', (req, res) => {

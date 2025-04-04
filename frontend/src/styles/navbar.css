@@ -1,0 +1,41 @@
+.custom-nav-bar{
+  position: fixed;
+}
+.nav-bar {
+  margin-top: 1.5rem !important;
+  width: 100%;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  z-index: 1111 !important;
+  left: 60vw;
+}
+
+.ff-00{
+  color: #000;
+}
+
+.auth-button{
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-left: 2rem;
+  margin-top: 0rem !important;
+}
+.logo{
+  position: absolute;
+  top: -1rem;
+  left: -55vw;
+}
+.nav-links-{
+  position: fixed;
+  left: 25vw;
+}
+.nav-item{
+  text-decoration: none;
+  margin-left: 2rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+}

@@ -58,22 +58,25 @@ sequelize.sync().then(() => {
 
 // ... (configuraciones previas iguales)
 
-// Importar controladores (routers) - MODIFICADO
-const authRoutes = require('./controllers/user'); // Nuevo
-const userRoutes = require('./controllers/user'); // ¿Este es otro archivo? Revisa nombres
-const documentsRoutes = require('./controllers/documents');
-const serviceRoutes = require('./controllers/services');
-const subscriptionRoutes = require('./controllers/subscription');
-const adminRoutes = require('./controllers/user'); // Si decides usar un controlador específico para administración
+// Importar rutas
+const authRoutes = require("./controllers/user")
+const userRoutes = require("./controllers/user")
+const documentsRoutes = require("./controllers/documents")
+const serviceRoutes = require("./controllers/services")
+const subscriptionRoutes = require("./controllers/subscriptions") // Nombre correcto
+const adminRoutes = require("./controllers/admin") // Nuevo controlador para administración
 
+// Registrar rutas
+app.use("/api/auth", authRoutes)
+app.use("/api/users", userRoutes)
+app.use("/api/documents", documentsRoutes)
+app.use("/api/services", serviceRoutes)
+app.use("/api/subscriptions", subscriptionRoutes)
+app.use("/api/admin", adminRoutes) // Ruta para funciones de administración
 
-// Rutas - MODIFICADO
-app.use('/api/auth', authRoutes); // Nueva línea para autenticación
-app.use('/api/users', userRoutes);
-app.use('/api/documents', documentsRoutes);
-app.use('/api/services', serviceRoutes);
-app.use('/api/subscriptions', subscriptionRoutes);
-app.use('/admin/users', adminRoutes);
+// Asociaciones
+Service.hasMany(Subscription, { foreignKey: "serviceId" });
+Subscription.belongsTo(Service, { foreignKey: "serviceId" });
 
 // Ruta de prueba
 app.get('/', (req, res) => {

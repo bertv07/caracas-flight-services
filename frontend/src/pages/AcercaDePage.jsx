@@ -199,7 +199,7 @@ export default function AcercaDePage() {
 
   return (
     <div className="acercade-page" ref={containerRef}>
-      {isAuthenticated() ? <NavBar /> : <BarraNavegacion />}
+      <NavBar />
 
       {/* Reutilizamos el componente SobreNosotrosAlt */}
       <SobreNosotrosAlt />

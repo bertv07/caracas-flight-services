@@ -2,14 +2,19 @@
 
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { isAuthenticated } from "../utils/authUtils"
+import { isAuthenticated, getUserId } from "../utils/authUtils"
 import "../styles/auth.css"
 import "../styles/services.css"
 import NavBar from "../components/auth/navBarAuth"
+import PaymentComponent from "../components/payment-component"
 
 export default function ServiciosPage() {
   const [activeTab, setActiveTab] = useState("todos")
   const isUserAuthenticated = isAuthenticated()
+  const [selectedService, setSelectedService] = useState(null)
+  const [showPaymentModal, setShowPaymentModal] = useState(false)
+  const [paymentSuccess, setPaymentSuccess] = useState(false)
+  const [paymentMessage, setPaymentMessage] = useState("")
 
   const servicios = [
     {
@@ -20,6 +25,7 @@ export default function ServiciosPage() {
         "Incluye abastecimiento de combustible, estacionamiento en rampa para aeronaves, acceso a sala VIP básica para pasajeros, y servicios de agua potable y limpieza básica de aeronaves.",
       imagen: "/placeholder.svg?height=200&width=300",
       precio: "USD $300 por aeronave",
+      price: 300, // Añadido para PayPal
     },
     {
       id: 2,
@@ -29,6 +35,7 @@ export default function ServiciosPage() {
         "Incluye todo lo del servicio básico, hangaraje para protección de aeronaves, catering estándar para pasajeros y tripulación, coordinación de permisos de vuelo y planificación básica, y transporte terrestre (limusina o taxi) para pasajeros.",
       imagen: "/placeholder.svg?height=200&width=300",
       precio: "USD $700 por aeronave",
+      price: 700, // Añadido para PayPal
     },
     {
       id: 3,
@@ -38,6 +45,7 @@ export default function ServiciosPage() {
         "Incluye todo lo del servicio intermedio, sala VIP de lujo con servicios personalizados, catering gourmet y bebidas premium, asistencia completa para tripulación, servicios de mantenimiento preventivo para aeronaves, y gestión de vuelos internacionales (aduanas y migración).",
       imagen: "/placeholder.svg?height=200&width=300",
       precio: "USD $1,500 por aeronave",
+      price: 1500, // Añadido para PayPal
     },
     {
       id: 4,
@@ -47,11 +55,85 @@ export default function ServiciosPage() {
         "Diseñado específicamente para viajes de negocios. Incluye todo lo del servicio premium, más sala de conferencias privada, servicios de secretariado y traducción, conectividad de alta velocidad, coordinación de reuniones en destino y transporte ejecutivo para todo el equipo.",
       imagen: "/placeholder.svg?height=200&width=300",
       precio: "USD $2,200 por aeronave",
+      price: 2200, // Añadido para PayPal
     },
   ]
 
   const filteredServicios =
     activeTab === "todos" ? servicios : servicios.filter((servicio) => servicio.categoria === activeTab)
+
+  const handleSubscribe = (service) => {
+    if (isUserAuthenticated) {
+      setSelectedService(service)
+      setShowPaymentModal(true)
+    } else {
+      // Si no está autenticado, redirigir a registro
+      window.location.href = "/register"
+    }
+  }
+
+  const handlePaymentSuccess = async (paymentData) => {
+    try {
+      const userId = getUserId()
+      const serviceId = selectedService.id
+
+      // Preparar los datos para enviar a la API
+      const subscriptionData = {
+        userId,
+        serviceId,
+        frequency: paymentData.frequency,
+        startDate: paymentData.startDate,
+        endDate: paymentData.endDate,
+        paymentMethod: paymentData.paymentMethod,
+        paymentDetails: JSON.stringify(paymentData),
+        status: paymentData.status || "pending",
+      }
+
+      console.log("Enviando datos de suscripción:", subscriptionData)
+
+      // Enviar los datos a la API
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/subscriptions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(subscriptionData),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Error al crear la suscripción")
+      }
+
+      // Configurar mensaje según el método de pago
+      let successMessage = ""
+      if (paymentData.paymentMethod === "paypal") {
+        successMessage = "¡Pago con PayPal exitoso! Su suscripción ha sido procesada correctamente."
+      } else if (paymentData.paymentMethod === "pagomovil") {
+        successMessage = "¡Solicitud de Pago Móvil registrada! Verificaremos su pago y activaremos su suscripción."
+      } else if (paymentData.paymentMethod === "efectivo") {
+        successMessage =
+          "¡Solicitud de pago en efectivo registrada! Un representante se comunicará con usted para coordinar la entrega."
+      }
+
+      setPaymentMessage(successMessage)
+      setPaymentSuccess(true)
+
+      // Cerrar el modal después de 3 segundos
+      setTimeout(() => {
+        setShowPaymentModal(false)
+        setSelectedService(null)
+        setPaymentSuccess(false)
+
+        // Redirigir a la página de suscripciones
+        window.location.href = "/subscriptions"
+      }, 3000)
+    } catch (error) {
+      console.error("Error:", error)
+      alert("Error al procesar la suscripción: " + error.message)
+    }
+  }
 
   return (
     <div>
@@ -103,9 +185,9 @@ export default function ServiciosPage() {
                 <p className="service-description">{servicio.descripcion}</p>
                 <div className="service-footer">
                   <span className="service-price">{servicio.precio}</span>
-                  <Link to="/register" className="service-button">
+                  <button className="service-button" onClick={() => handleSubscribe(servicio)}>
                     Inscribirse
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
@@ -131,6 +213,51 @@ export default function ServiciosPage() {
           </div>
         )}
       </div>
+
+      {/* Modal de pago */}
+      {showPaymentModal && selectedService && (
+        <PaymentComponent
+          service={selectedService}
+          onClose={() => setShowPaymentModal(false)}
+          onSuccess={handlePaymentSuccess}
+        />
+      )}
+
+      {/* Modal de éxito - se muestra después de un pago exitoso */}
+      {paymentSuccess && (
+        <div
+          className="subscription-modal"
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0,0,0,0.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 10000,
+          }}
+        >
+          <div
+            className="mensaje-exito"
+            style={{
+              backgroundColor: "#d4edda",
+              color: "#155724",
+              padding: "2rem",
+              borderRadius: "12px",
+              textAlign: "center",
+              maxWidth: "400px",
+              width: "100%",
+            }}
+          >
+            <h3 style={{ marginBottom: "1rem", fontSize: "1.5rem" }}>¡Solicitud Exitosa!</h3>
+            <p>{paymentMessage}</p>
+            <p style={{ marginTop: "1rem", fontSize: "0.9rem" }}>Redirigiendo a sus suscripciones...</p>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

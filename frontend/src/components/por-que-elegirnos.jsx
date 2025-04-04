@@ -50,7 +50,7 @@ export default function PorQueElegirnos() {
 
         <div className="cards-tlf">
           <div className="card-tlf c1-tlf">
-            <div className="img-tlf-1" style={{ backgroundImage: "url(assets/img/certificado.jpg)" }}>
+            <div className="img-tlf-1" >
               <div className="text-tlf-1 text-tlf">
                 <h5>Primer FBO certificado en venezuela.</h5>
                 <div className="boton-pq-tlf">
@@ -60,7 +60,7 @@ export default function PorQueElegirnos() {
             </div>
           </div>
           <div className="card-tlf c2-tlf">
-            <div className="img-tlf-2" style={{ backgroundImage: "url(assets/img/IMG_1943.JPG)" }}>
+            <div className="img-tlf-2" >
               <div className="text-tlf-2 text-tlf">
                 <h5>Eficiencia y rapidez con nosotros.</h5>
                 <div className="boton-pq-tlf">
@@ -70,7 +70,7 @@ export default function PorQueElegirnos() {
             </div>
           </div>
           <div className="card-tlf c3-tlf">
-            <div className="img-tlf-3" style={{ backgroundImage: "url(assets/img/IMG_1550.JPG)" }}>
+            <div className="img-tlf-3" >
               <div className="text-tlf-3 text-tlf">
                 <h5>Cumplimos con todas las normativas de seguridad aeroportuaria.</h5>
                 <div className="boton-pq-tlf">

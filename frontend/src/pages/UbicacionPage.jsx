@@ -3,7 +3,6 @@
 import { useState } from "react"
 import BarraNavegacion from "../components/barra-navegacion"
 import NavBar from "../components/auth/navBarAuth"
-import { isAuthenticated } from "../utils/authUtils"
 import "../styles/ubicacion.css"
 
 export default function UbicacionPage() {
@@ -11,7 +10,7 @@ export default function UbicacionPage() {
 
   return (
     <div className="ubicacion-page" style={{ paddingTop: "3rem", marginTop: "5rem", paddingBottom: "4rem" }}>
-      {isAuthenticated() ? <NavBar /> : <BarraNavegacion />}
+      <NavBar />
 
       <div className="ubicacion-container">
         <div className="ubi-cont">

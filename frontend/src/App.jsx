@@ -13,6 +13,12 @@ import SeccionNosotros from "./components/seccion-nosotros"
 import PorQueElegirnos from "./components/por-que-elegirnos"
 import SeccionUbicacion from "./components/seccion-ubicacion"
 import FormularioContacto from "./components/formulario-contacto"
+import ContactForm from "./components/contact-form"
+
+// Renombrar uno de los imports para evitar conflicto
+import ServiciosPageComponent from "./pages/servicios-page"
+import SubscriptionPage from "./pages/subscription-page"
+import AdminPage from "./pages/admin-page"
 
 // Páginas de autenticación
 import LoginPage from "./pages/LoginPage"
@@ -87,12 +93,16 @@ const HomePage = () => {
       <SeccionNosotros />
       <PorQueElegirnos />
       <SeccionUbicacion />
-      <FormularioContacto />
+      <ContactForm />
     </main>
   )
 }
 
 export default function App() {
+  // Obtener el estado de autenticación y el rol del usuario
+  const isUserAuthenticated = isAuthenticated()
+  const userRole = getUserRole()
+
   return (
     <Router>
       <Routes>
@@ -104,13 +114,34 @@ export default function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
-        {/* Ruta de servicios */}
+        {/* Ruta de servicios - Usar el componente de página */}
         <Route path="/servicios" element={<ServiciosPage />} />
+
+        {/* Ruta alternativa para el componente de servicios */}
+        <Route path="/servicios-component" element={<ServiciosPageComponent />} />
 
         {/* Nuevas rutas */}
         <Route path="/contacto" element={<ContactoPage />} />
         <Route path="/ubicacion" element={<UbicacionPage />} />
         <Route path="/acerca-de" element={<AcercaDePage />} />
+
+        {/* Ruta para la página de suscripciones (singular) */}
+        <Route
+          path="/subscription"
+          element={isUserAuthenticated ? <SubscriptionPage /> : <Navigate to="/login" replace />}
+        />
+
+        {/* Ruta alternativa en plural por si acaso */}
+        <Route
+          path="/subscriptions"
+          element={isUserAuthenticated ? <SubscriptionPage /> : <Navigate to="/login" replace />}
+        />
+
+        {/* Ruta para la página de administración */}
+        <Route
+          path="/admin"
+          element={isUserAuthenticated && userRole === "admin" ? <AdminPage /> : <Navigate to="/login" replace />}
+        />
 
         {/* Rutas protegidas */}
         <Route

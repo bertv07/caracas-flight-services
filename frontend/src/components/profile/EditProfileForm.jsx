@@ -78,7 +78,7 @@ export default function EditProfileForm() {
       const userId = getUserId();
 
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/auth/edit-profile`,
+        `${import.meta.env.VITE_API_URL}/api/auth/edit-profile`,
         {
           method: "POST",
           headers: {

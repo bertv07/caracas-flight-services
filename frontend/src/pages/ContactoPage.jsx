@@ -59,7 +59,7 @@ export default function ContactoPage() {
 
   return (
     <div className="contacto-page">
-      {isAuthenticated() ? <NavBar /> : <BarraNavegacion />}
+      <NavBar />
 
       <div className="contacto-container">
         <div className="contacto-info">

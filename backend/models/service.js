@@ -1,42 +1,25 @@
-'use strict';
-const { Model } = require('sequelize');
+// service.js
+const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class Service extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+  class Service extends Model { // <-- Define la clase Service
     static associate(models) {
-      // Un servicio puede estar en muchas suscripciones
-      Service.hasMany(models.Subscription, { foreignKey: 'serviceId' });
+      Service.hasMany(models.Subscription, { foreignKey: "serviceId" });
     }
   }
 
   Service.init(
     {
-      // Nombre del servicio
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      // Descripción del servicio
-      description: {
-        type: DataTypes.TEXT,
-        allowNull: false,
-      },
-      // Precio del servicio
-      price: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-      },
+      // Solo campos existentes en la base de datos
+      name: DataTypes.STRING,
+      description: DataTypes.TEXT,
+      price: DataTypes.FLOAT,
     },
     {
       sequelize,
-      modelName: 'Service',
+      modelName: "Service",
     }
   );
 
-  return Service;
+  return Service; // <-- Exporta correctamente
 };

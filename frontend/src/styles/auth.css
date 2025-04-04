@@ -194,3 +194,12 @@ body {
   }
 }
 
+.auth-nav-button svg {
+  width: 2.8rem !important;
+  height: 2.8rem !important;
+  margin-right: 1rem;
+}
+.admin svg {
+  width: 2rem !important;
+  margin-left: 1rems;
+}
