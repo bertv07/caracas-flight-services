@@ -30,7 +30,10 @@
     margin: 0;
     font-family: var(--font-titles);
   }
-  
+  a{
+    color: #fff;
+    text-decoration: none;
+  }
   /*nav*/
   .nav {
     width: 100%;
