@@ -92,7 +92,7 @@ const HomePage = () => {
       <CarruselLogos />
       <SeccionNosotros />
       <PorQueElegirnos />
-      <SeccionUbicacion />
+      {/* <SeccionUbicacion /> */}
       <ContactForm />
     </main>
   )

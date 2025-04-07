@@ -6,6 +6,7 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const dbConfig = require('./config/config.json').development;
 require('dotenv').config();
+const transporter = require('./config/mail');
 
 const app = express();
 const port = process.env.PORT;
@@ -59,7 +60,6 @@ sequelize.sync().then(() => {
 // ... (configuraciones previas iguales)
 
 // Importar rutas
-const authRoutes = require("./controllers/user")
 const userRoutes = require("./controllers/user")
 const documentsRoutes = require("./controllers/documents")
 const serviceRoutes = require("./controllers/services")
@@ -67,12 +67,28 @@ const subscriptionRoutes = require("./controllers/subscriptions") // Nombre corr
 const adminRoutes = require("./controllers/admin") // Nuevo controlador para administración
 
 // Registrar rutas
-app.use("/api/auth", authRoutes)
+app.use("/api/auth", userRoutes)
 app.use("/api/users", userRoutes)
 app.use("/api/documents", documentsRoutes)
 app.use("/api/services", serviceRoutes)
 app.use("/api/subscriptions", subscriptionRoutes)
 app.use("/api/admin", adminRoutes) // Ruta para funciones de administración
+
+app.get('/send-mail', async (request, response) => {
+    const mailOption = {
+        from: 'caracas.flight.services.email@gmail.com',
+        to: 'gleybertmartinez0702@gmail.com',
+        subject: 'Correo de prueba',
+        text: 'Este es un correo de prueba.'
+    }
+    try {
+        await transporter.sendMail(mailOption);
+        response.status(200).send({ message: 'Correo enviado' });
+    } catch (error) {
+        console.error('Error al enviar el correo:', error);
+        response.status(500).send({ message: 'Error al enviar el correo' });
+    }
+})
 
 // Asociaciones
 Service.hasMany(Subscription, { foreignKey: "serviceId" });

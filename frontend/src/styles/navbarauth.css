@@ -132,12 +132,21 @@
   .custom-admin {
     background-color: #dc3545;
     border: none;
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+  .custom-admin svg{
+    width: 2rem !important;
   }
   
   .custom-admin:hover {
     background-color: #c82333;
   }
   
+  .auth-buttons-links{
+    display: flex;
+  }
+
   /* Hamburger menu */
   .custom-hamburger {
     display: none;
@@ -184,6 +193,11 @@
   .custom-nav-links{
     display: none;
   }
+  @media screen and (max-width: 1360px) {
+    .nav-links-{
+      margin-left: -4rem !important;
+    }
+  }
   /* Media query for hamburger menu at 1260px */
   @media screen and (max-width: 1260px) {
     .custom-nav-links{
@@ -193,7 +207,7 @@
         display: none;
     }
     .custom-hamburger {
-      margin-left: 4rem;
+      margin-left: 30%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -310,9 +324,42 @@
   }
   
   /* Additional responsive adjustments */
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 800px) {
     .custom-nav-links {
       width: 70%;
+    }
+    .custom-hamburger{
+        margin-left: 10rem;
+    }
+    .logo img{
+      margin-top: 1rem;
+        width: 13rem !important;
+    }
+  }
+  @media screen and (max-width: 660px) {
+    .custom-nav-links {
+      width: 70%;
+    }
+    .custom-hamburger{
+        margin-left: 8rem;
+    }
+    .logo img{
+      margin-top: 1rem;
+      margin-left: 0;
+        width: 13rem !important;
+    }
+  }
+  @media screen and (max-width: 540px) {
+    .custom-nav-links {
+      width: 70%;
+    }
+    .custom-hamburger{
+        margin-left: 6rem;
+    }
+    .logo img{
+      margin-top: 1rem;
+      margin-left: 0;
+        width: 13rem !important;
     }
   }
   
@@ -349,4 +396,16 @@
         margin-top: -2.5rem;
     }
   }
-  
+  @media screen and (max-width: 380px) {
+    .custom-nav-links {
+      width: 70%;
+    }
+    .custom-hamburger{
+        margin-left: 2rem;
+    }
+    .logo img{
+      margin-top: 1rem;
+      margin-left: 0;
+        width: 13rem !important;
+    }
+  }

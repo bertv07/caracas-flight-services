@@ -17,7 +17,7 @@
     display: block;
     margin-left: 5rem;
     font-size: 1.9rem;
-    color: #fff;
+    color: #000;
     display: flex;
     justify-content: center;
     height: 70%;
@@ -136,7 +136,7 @@
     margin-top: -5rem;
     margin-left: 6rem;
     font-size: 1.9rem;
-    color: #fff;
+    color: #000;
     display: flex;
     justify-content: center;
     height: 70%;
@@ -431,8 +431,10 @@
     height: 70vh;
   }
   .text-s-responsive p {
-    text-align: justify;
+    text-align: center;
     font-size: 1.4rem;
+    margin-top: -10rem;
+    margin-left: 2rem;
     margin-right: 0;
   }
   .cards-pa {
@@ -883,17 +885,13 @@
   .text-s-responsive {
     width: 235%;
     margin-left: -1rem;
-    margin-top: -7rem;
+    margin-top: -8rem;
     text-align: justify;
   }
   .fondo-sn {
     height: 70vh;
   }
-  .text-s-responsive p {
-    text-align: justify;
-    font-size: 1.4rem;
-    margin-right: 0;
-  }
+
   .cards-pa {
     margin: 2rem;
     margin-left: 0;
@@ -1040,6 +1038,7 @@
     width: 19rem;
     margin-left: 3rem;
     margin-top: -8rem;
+    color: #000;
   }
   .fff h2 {
     font-size: 1.5rem !important;
@@ -1085,6 +1084,7 @@
     width: 42rem !important;
   }
   .text-s-responsive-tablet {
+    color: #000;
     font-size: 1.2rem;
     width: 18rem;
     margin-left: 2rem;

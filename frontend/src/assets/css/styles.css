@@ -18,6 +18,13 @@
     overflow-x: hidden;
   }
   
+  a{
+    text-decoration: none;
+    color: #efefef;
+  }
+  .slider{
+    display: none !important;
+  }
   * {
     padding: 0;
     margin: 0;
@@ -365,7 +372,7 @@
     display: flex;
     justify-content: center;
     text-transform: uppercase;
-    color: #fff;
+    color: #000000;
   }
   .fff {
     color: #fff;
@@ -426,7 +433,7 @@
   
   /*Sobre Nosotros*/
   .fondo-sn {
-    background-color: var(--background-black);
+    background-color: #FFFFFF;
   }
   .sobre-nosotros {
     display: grid;
@@ -458,11 +465,11 @@
   }
   .text-s {
     font-size: 1.9rem;
-    color: #fff;
+    color: #000000;
     display: flex;
     justify-content: center;
     height: 70%;
-    align-items: center;
+    align-items: right;
   }
   
   .text-s-responsive {
@@ -475,17 +482,15 @@
   
   .text-s-responsive p {
     width: 70%;
-    text-align: justify;
   }
   
   .text-s-responsive-tablet {
     width: 70%;
-    text-align: justify;
   }
   
   .text-s p {
     width: 70%;
-    text-align: justify;
+    text-align: right;
   }
   
   /*Programas*/
@@ -633,7 +638,7 @@
   .contactanos {
     width: 100vw;
     min-height: 88vh;
-    background-color: var(--background-black);
+    background-color: #ffff;
     display: flex;
     align-items: center;
     justify-content: center;
