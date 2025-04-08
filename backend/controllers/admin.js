@@ -263,5 +263,76 @@ router.post("/reject-user/:id", async (req, res) => {
     res.status(500).json({ error: "Error al rechazar el usuario" })
   }
 })
+// Ruta para obtener todos los usuarios
+router.get('/users', async (req, res) => {
+  try {
+    const users = await User.findAll();
+    res.json(users);
+  } catch (error) {
+    console.error('Error al obtener usuarios:', error);
+    res.status(500).json({ error: 'Error al recuperar los usuarios' });
+  }
+});
+
+// Ruta para actualizar un usuario
+router.put('/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { role, status } = req.body;
+    
+    const user = await User.findByPk(id);
+    
+    if (!user) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+    
+    // Actualizar los campos proporcionados
+    if (role) user.role = role;
+    if (status) user.status = status;
+    
+    await user.save();
+    
+    res.json({ 
+      message: 'Usuario actualizado correctamente',
+      user: {
+        id: user.id,
+        username: user.username,
+        role: user.role,
+        status: user.status
+      }
+    });
+  } catch (error) {
+    console.error('Error al actualizar usuario:', error);
+    res.status(500).json({ error: 'Error al actualizar el usuario' });
+  }
+});
+
+// Ruta para aprobar un usuario
+router.put('/users/:id/approve', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByPk(id);
+    
+    if (!user) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+    
+    user.status = 'approved';
+    await user.save();
+    
+    // Si tienes un servicio de email, puedes notificar al usuario
+    // await emailService.sendAccountApprovalEmail(user);
+    
+    res.json({ message: 'Usuario aprobado correctamente' });
+  } catch (error) {
+    console.error('Error al aprobar usuario:', error);
+    res.status(500).json({ error: 'Error al aprobar el usuario' });
+  }
+});
+
+// Otras rutas de administración...
+
+module.exports = router;
+
 
 module.exports = router

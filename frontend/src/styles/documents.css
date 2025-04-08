@@ -96,7 +96,7 @@
   font-size: 1.2rem;
 }
 
-.auth-button {
+.auth-button au-btn {
   background-color: var(--color-green);
   color: white;
   border: none;
@@ -109,11 +109,11 @@
   margin-top: 1rem;
 }
 
-.auth-button:hover {
+.auth-button au-btn:hover {
   background-color: var(--green-button-hover);
 }
 
-.auth-button:disabled {
+.auth-button au-btn:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }

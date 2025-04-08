@@ -1,7 +1,7 @@
 :root {
     --color-green: #0c5b2b;
     --font-titles: "Helvetica Light", sans-serif;
-    --size-titles: 4.5rem;
+    --size-titles: 2.5rem;
     --green-button-hover: #084220;
     --duration-hover-button: .2s;
     --background-black: #222222;
@@ -10,6 +10,9 @@
   * {
     margin: 0;
     padding: 0;
+  }
+   h2, h3{
+    text-transform: uppercase;
   }
   
   html,
@@ -214,9 +217,11 @@
     background-color: var(--background-black);
     text-align: center;
     color: #fff;
-    font-size: var(--size-titles);
+    font-size: 2.5rem  !important;
     font-family: var(--font-titles);
   }
+  
+
   
   .nuestros {
     position: relative;
@@ -340,7 +345,7 @@
   .service-card p {
     margin: 1rem;
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 600 !important;
     width: 48rem;
   }
   
@@ -367,10 +372,11 @@
   .read-more:hover {
     background-color: #008000;
   }
-  
+  .subti h2 {
+    font-size: 2.5rem;
+  }
   .subti {
     padding: 4rem;
-    font-size: 3rem;
     font-family: Helvetica;
     display: flex;
     justify-content: center;
@@ -536,11 +542,14 @@
     height: 458px;
     width: 400px;
     border-radius: 24px;
-    margin-top: 5.1rem;
+    margin-top: 8.1rem;
     position: relative;
     overflow: hidden;
   }
-  
+  .titu{
+    margin-top: -4rem;
+    padding-bottom: 1rem;
+  }
   .img img {
     height: 100%;
     width: 100%;
@@ -548,15 +557,53 @@
     display: block;
     transition: transform 0.3s ease;
   }
-  
+  .auth-button{
+    background-color: transparent !important;
+    margin-left: 2rem;
+  }
+  .auth-button svg{
+    background-color: #0c5b2b;
+    height: 3rem;
+    width: 4rem !important;
+    padding: .5rem 1rem;
+    border-radius: 12px;
+    margin-left: 1rem;
+  }
   .img:hover img {
     transform: scale(1.1);
   }
-  
+  .au-btn{
+    margin-left: 0rem !important; 
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    background-color: #0a4120 !important;
+    padding: 1rem 3rem;
+    border-radius: 24px;
+    cursor: pointer;
+  }
+  .au-btn:hover{
+    margin-left: 0rem !important; 
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    background-color: #05381a !important;
+    padding: 1rem 3rem;
+    border-radius: 24px;
+  }
   .img:hover {
     background-color: #222222;
   }
-  
+  .au-btn-ce{
+    margin-left: 0;
+  }
+  .custom-admin-w{
+    background-color: transparent !important;
+  }
   .cards {
     display: flex;
     justify-content: center;

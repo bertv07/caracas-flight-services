@@ -386,7 +386,7 @@ export default function PaymentComponent({ service, onClose, onSuccess }) {
 
             <button
               type="submit"
-              className="auth-button"
+              className="auth-button au-btn "
               disabled={loading}
               style={{
                 backgroundColor: "#023a02",
@@ -489,7 +489,7 @@ export default function PaymentComponent({ service, onClose, onSuccess }) {
 
             <button
               type="submit"
-              className="auth-button"
+              className="auth-button au-btn"
               disabled={loading}
               style={{
                 backgroundColor: "#023a02",
@@ -541,7 +541,7 @@ export default function PaymentComponent({ service, onClose, onSuccess }) {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <button
             onClick={onClose}
-            className="auth-button"
+            className="auth-button au-btn"
             style={{
               backgroundColor: "transparent",
               border: "1px solid white",

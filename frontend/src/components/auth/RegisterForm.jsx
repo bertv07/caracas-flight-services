@@ -125,7 +125,7 @@ export default function RegisterForm() {
           required
         />
 
-        <button type="submit" className="auth-button" disabled={loading}>
+        <button type="submit" className="auth-button au-btn" disabled={loading}>
           {loading ? "Procesando..." : "Registrarse"}
         </button>
       </form>

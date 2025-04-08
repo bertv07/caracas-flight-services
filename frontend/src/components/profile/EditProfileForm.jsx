@@ -189,7 +189,7 @@ export default function EditProfileForm() {
           />
         </div>
 
-        <button type="submit" className="auth-button" disabled={loading}>
+        <button type="submit" className="auth-button au-btn" disabled={loading}>
           {loading ? "Guardando..." : "Guardar Cambios"}
         </button>
       </form>

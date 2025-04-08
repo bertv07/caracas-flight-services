@@ -112,7 +112,7 @@ body {
   font-size: 0.9rem;
 }
 
-.auth-button {
+.auth-button au-btn {
   background-color: #023a02;
   border: none;
   border-radius: 16px;
@@ -124,11 +124,11 @@ body {
   transition: background-color var(--duration-hover-button);
 }
 
-.auth-button:hover {
+.auth-button au-btn:hover {
   background-color: var(--green-button-hover);
 }
 
-.auth-button:disabled {
+.auth-button au-btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
@@ -188,7 +188,7 @@ body {
     padding: 0.8rem;
   }
 
-  .auth-button {
+  .auth-button au-btn {
     padding: 0.7rem 2rem;
     font-size: 1rem;
   }
@@ -202,4 +202,33 @@ body {
 .admin svg {
   width: 2rem !important;
   margin-left: 1rems;
+}
+
+/* Estilos para el input del código */
+.auth-code-input {
+  letter-spacing: 0.5em;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.auth-description {
+  margin-bottom: 1rem;
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.auth-link-button {
+  background: none;
+  border: none;
+  color: #003366;
+  text-decoration: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.auth-link-button:hover {
+  text-decoration: underline;
 }

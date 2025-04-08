@@ -3,6 +3,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+const path = require('path');
 const cookieParser = require('cookie-parser');
 const dbConfig = require('./config/config.json').development;
 require('dotenv').config();
@@ -11,6 +12,19 @@ const transporter = require('./config/mail');
 const app = express();
 const port = process.env.PORT;
 const host = process.env.HOST;
+
+// Configurar CORS para permitir solicitudes desde tu frontend
+app.use(cors({
+  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'], // Orígenes permitidos
+  credentials: true, // Permitir cookies en solicitudes cross-origin
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'] // Headers permitidos
+}));
+
+// Configurar para servir archivos estáticos
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Resto de tu configuración...
 
 // Middlewares
 app.use('/uploads', express.static('uploads'));
@@ -98,6 +112,18 @@ Subscription.belongsTo(Service, { foreignKey: "serviceId" });
 app.get('/', (req, res) => {
     res.send('¡Bienvenido a la API de Caracas Flight Services!');
 });
+
+// En tu archivo app.js o index.js, después de inicializar Sequelize
+
+// Sincronizar solo los cambios (no borra datos existentes)
+sequelize.sync({ alter: true })
+  .then(() => {
+    console.log('Base de datos sincronizada');
+  })
+  .catch(err => {
+    console.error('Error al sincronizar la base de datos:', err);
+  });
+
 
 // Iniciar servidor
 app.listen(port, () => {

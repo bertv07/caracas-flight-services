@@ -15,7 +15,7 @@
   color: #000;
 }
 
-.auth-button{
+.auth-button au-btn{
   text-decoration: none;
   display: flex;
   align-items: center;

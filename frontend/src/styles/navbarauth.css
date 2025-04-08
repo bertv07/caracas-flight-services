@@ -41,11 +41,12 @@
   }
   
   .custom-logo img {
-    width: 13rem !important;
-    margin-top: 5.5rem;
-    margin-left: -10%;
-    width: auto;
+    width: 19rem !important;
     object-fit: contain;
+    z-index: 1000;
+    position: absolute;
+    top: .5rem;
+    left: -2.8rem;
   }
   
   /* Navigation links */
@@ -93,16 +94,16 @@
   }
   
   /* Auth buttons */
-  .custom-auth-buttons {
+  .custom-auth-button au-btns {
     display: flex;
     gap: 10px;
     margin-left: 20px;
   }
-  .auth-button{
+  .auth-button au-btn{
     height: 2rem !important;
     width: 2rem !important;
   }
-  .custom-auth-button {
+  .custom-auth-button au-btn {
     padding: 8px 16px;
     border-radius: 4px;
     text-decoration: none;
@@ -140,10 +141,20 @@
     background-color: #c82333;
   }
   
-  .auth-buttons-links{
+  .auth-button au-btns-links{
     display: flex;
   }
-
+  .au-btns-links{
+    margin-right: 5vw;
+  }
+  .amd svg{
+    padding: 1.2rem 1.1rem;
+  }
+  .amd-1 svg{
+    height: 2rem !important;
+    margin-left: 10rem;
+    margin-top: -4.5rem;
+  }
   /* Hamburger menu */
   .custom-hamburger {
     display: none;
@@ -181,11 +192,11 @@
   }
   
   .custom-hamburger.active .custom-line2 {
-    opacity: 0;
+    opacity: 0; 
   }
   
   .custom-hamburger.active .custom-line3 {
-    transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-0px) rotate(-45deg);
   }
   .custom-nav-links{
     display: none;
@@ -243,14 +254,14 @@
       width: 100%;
     }
     
-    .custom-auth-buttons {
+    .custom-auth-button au-btns {
       flex-direction: column;
       width: 80%;
       margin-left: 0;
       margin-top: 20px;
     }
     
-    .custom-auth-button {
+    .custom-auth-button au-btn {
       margin: 5px 0;
       width: 100%;
       justify-content: flex-start;
@@ -264,7 +275,7 @@
     }
     /* Animation for menu items */
     .custom-nav-bar.active .custom-nav-item,
-    .custom-nav-bar.active .custom-auth-button {
+    .custom-nav-bar.active .custom-auth-button au-btn {
       animation: customFadeIn 0.5s ease forwards;
       opacity: 0;
     }
@@ -306,9 +317,11 @@
     
     /* Adjust hamburger animation */
     .custom-nav-bar.active .custom-line1 {
-      transform: translateY(7px) rotate(45deg);
+      transform: translateY(15px) rotate(45deg);
     }
-    
+    .custom-nav-bar.active .custom-line2 {
+      transform: translatex(15px) scale(0);
+    }
     .custom-nav-bar.active .custom-line3 {
       transform: translateY(-7px) rotate(-45deg);
     }

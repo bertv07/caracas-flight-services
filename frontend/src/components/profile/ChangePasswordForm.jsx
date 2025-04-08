@@ -125,7 +125,7 @@ export default function ChangePasswordForm() {
           />
         </div>
 
-        <button type="submit" className="auth-button" disabled={loading}>
+        <button type="submit" className="auth-button au-btn" disabled={loading}>
           {loading ? "Procesando..." : "Cambiar Contraseña"}
         </button>
       </form>

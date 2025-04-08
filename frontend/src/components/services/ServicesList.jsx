@@ -269,7 +269,7 @@ export default function ServicesList() {
                 </p>
               </div>
 
-              <button type="submit" className="auth-button" disabled={subscriptionLoading}>
+              <button type="submit" className="auth-button au-btn" disabled={subscriptionLoading}>
                 {subscriptionLoading ? "Procesando..." : "Confirmar Suscripción"}
               </button>
             </form>

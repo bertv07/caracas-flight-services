@@ -7,5 +7,7 @@ const transporter = nodemailer.createTransport({
         pass: 'onnj ozbi llyy ljwe'
     },
 });
-
+transporter.verify().then(() => {
+    console.log('Ready for send emails');
+});
 module.exports = transporter;

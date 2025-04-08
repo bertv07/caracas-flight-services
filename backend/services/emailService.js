@@ -1,14 +1,5 @@
 const nodemailer = require('nodemailer');
-const config = require('../config/mail');
-
-// Configurar el transporter de nodemailer con las credenciales de Gmail
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: config.email,
-    pass: config.password
-  }
-});
+const transporter = require('../config/mail');
 
 // Correo de bienvenida al usuario cuando se registra
 const sendWelcomeEmail = async (user) => {
@@ -372,6 +363,41 @@ const sendPaymentConfirmationEmail = async (user, subscription, service, payment
   }
 };
 
+// Correo para recuperación de contraseña
+const sendPasswordResetEmail = async (user, resetToken) => {
+  try {
+    // Crear la URL de restablecimiento con el token
+    const resetUrl = `${process.env.WEBSITE_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`;
+    
+    await transporter.sendMail({
+      from: 'caracas.flight.services.email@gmail.com',
+      to: user.email,
+      subject: 'Recuperación de contraseña - Caracas Flight Services',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
+          <h1 style="color: #003366; text-align: center;">Recuperación de Contraseña</h1>
+          <p>Hola ${user.firstName},</p>
+          <p>Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en Caracas Flight Services.</p>
+          <p>Para continuar con el proceso de recuperación, haz clic en el siguiente botón:</p>
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${resetUrl}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Restablecer Contraseña</a>
+          </div>
+          <p>Este enlace expirará en 1 hora por razones de seguridad.</p>
+          <p>Si no solicitaste restablecer tu contraseña, puedes ignorar este correo. Tu cuenta sigue segura.</p>
+          <p style="margin-top: 30px;">Saludos cordiales,</p>
+          <p><strong>Equipo de Caracas Flight Services</strong></p>
+        </div>
+      `
+    });
+    console.log(`Correo de recuperación de contraseña enviado a ${user.email}`);
+    return true;
+  } catch (error) {
+    console.error('Error al enviar correo de recuperación de contraseña:', error);
+    return false;
+  }
+};
+
+
 // Exportar todas las funciones
 module.exports = {
   sendWelcomeEmail,
@@ -384,5 +410,6 @@ module.exports = {
   sendSubscriptionRejectionEmail,
   sendSubscriptionCancellationEmail,
   sendPaymentReminderEmail,
-  sendPaymentConfirmationEmail
+  sendPaymentConfirmationEmail,
+  sendPasswordResetEmail
 };

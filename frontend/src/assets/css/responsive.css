@@ -56,7 +56,11 @@
     margin-top: 4rem;
   }
 }
-
+@media (max-width: 1600px) {  
+  .custom-logo img{
+    margin-left: 3rem !important;  
+  }
+}
 /* Large screens with min-width */
 @media (min-width: 1440px) {
   .resp {
@@ -112,6 +116,7 @@
     font-size: 2.5rem;
     margin-bottom: 3rem;
   }
+
 }
 
 /* Medium screens with height constraint */
@@ -215,10 +220,10 @@
   .hamburger.active .line1 {
     transform: rotate(45deg);
     position: relative;
-    top: 7px;
+    top: 0px !important;
   }
   .hamburger.active .line2 {
-    transform: scaleY(0);
+    transform: scaleY(0) ;
     opacity: 0;
   }
   .hamburger.active .line3 {
@@ -402,6 +407,9 @@
 }
 /* Medium-small screens */
 @media (max-width: 1200px) {
+  .contacto-form{
+    width: 40vw !important;
+  }
   .s-n-4 button {
     margin-top: -1%;
   }
@@ -613,6 +621,31 @@
 
 /* Tablet screens */
 @media (max-width: 900px) {
+  .contacto-section{
+    height: 80vh;
+  }
+  .contact-info-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-left: 1rem;
+  }
+  .contacto-form {
+    width: 80vw !important;
+    margin-top: 13rem;
+    margin-left: -2rem !important;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .form-row{
+    margin-bottom: 0;
+  }
+  .map-container{
+    width: 80%;
+    position: absolute;
+    margin-top: 20rem;
+  }
   .nuestros-responsive-tablet{
     margin-left: -3rem;
   }
@@ -639,10 +672,19 @@
     background-position: 35% 20%;
     height: 100%;
   }
+  .custom-logo img{
+    margin-left: 6rem !important;
+  }
 }
 
 /* Tablet/mobile breakpoint */
 @media (max-width: 780px) {
+  .contact-info-box{ 
+    margin-left: -2rem;
+  }
+  .contacto-form {
+    margin-left: -3rem !important;
+  }
   .h1 h1 {
     font-size: 4rem;
   }
@@ -662,6 +704,9 @@
     margin-left: 40%;
     margin-top: 3%;
   }
+  .info-grid{
+    margin-left: -1rem !important;
+  }
   .car-res {
     height: 110%;
   }
@@ -670,6 +715,10 @@
   }
   .fondo-1 {
     background-position: 35% 20%;
+  }
+  .cForm{
+    margin-top: 1rem;
+    margin-left: 1rem !important;
   }
 }
 
@@ -687,6 +736,9 @@
   }
   .nuestros-responsive-tablet {
     min-height: 100vh;
+  }
+  .historia{
+    display: none;
   }
 }
 
@@ -738,6 +790,15 @@
   .slider{
     display: none;
   }
+  .map-container{
+    display: none;
+  }
+  .contacto-form{
+    margin-top: 0;
+  }
+  .contact-left-column{
+    display: none;
+  }
 }
 
 /* Large mobile */
@@ -762,10 +823,25 @@
   .fondo-1 {
     background-position: 35% 20%;
   }
+  .contacto-form {
+    margin-left: -4.3rem !important;
+  }
+  .cForm{
+    margin-left: 0rem !important;
+  }
 }
 
 /* Mobile */
 @media (max-width: 480px) {
+  .cForm{
+    margin-left:-1rem !important;
+  }
+  h2{
+    font-size: 1.3rem !important;
+  }
+  .info-text > h3{
+    font-size: .9rem !important;
+  }
   .fondo-black {
     rotate: 0deg;
     width: 45rem;
@@ -1000,6 +1076,13 @@
   .enviar-button {
     margin-top: -4rem;
   }
+  .custom-logo img{
+    margin-top: .5rem;
+    margin-left: 5rem !important;
+  }
+  .custom-nav{
+    height: 5rem;
+  }
 }
 
 /* Small mobile */
@@ -1011,6 +1094,25 @@
 
 /* Extra small mobile */
 @media (max-width: 400px) {
+  .contacto-info{
+    margin-left: -1rem !important;
+    padding-left: 1rem !important;
+  }
+  .cForm{
+    margin-left: -.6  rem !important;
+  }
+  .contacto-form {
+    margin-left: -5.3rem ;
+    margin-top: 1rem;
+    padding-left: 1rem;
+  }
+  .contacto-form > div{
+    margin: 0 !important;
+    padding: 0 !important;
+  } 
+  .submit-button{
+    margin-top: 0;
+  }
   .hamburger {
     margin-left: 3.5rem;
   }
@@ -1092,5 +1194,17 @@
   }
   #comentario {
     padding-bottom: 5rem;
+  }
+  .text-crad-nuestros-tlf{
+    width: 115% !important;
+  } 
+  .info-grid{
+    margin-left: -2.6rem !important;
+  }
+  .historia-content img{
+    width: 80%;
+  }
+  .historia-content p{
+    width: 80%;
   }
 }

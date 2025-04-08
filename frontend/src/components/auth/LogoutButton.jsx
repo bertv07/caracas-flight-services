@@ -40,7 +40,7 @@ export default function LogoutButton() {
     <button
       onClick={handleLogout}
       disabled={loading}
-      className="auth-button"
+      className="auth-button au-btn-ce"
       style={{
         display: "flex",
         alignItems: "center",

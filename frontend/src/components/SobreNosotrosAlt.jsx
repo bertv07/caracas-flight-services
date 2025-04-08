@@ -15,7 +15,7 @@ export default function SobreNosotrosAlt() {
     gsap.to(".sobre-nosotros-alt", {
       opacity: 1,
       yPercent: -10,
-      markers: true,
+      markers: false,
     });
   }, []);
 

@@ -99,7 +99,7 @@ export default function LoginForm() {
             ¿Olvidaste tu contraseña?
           </Link>
 
-          <button type="submit" className="auth-button" disabled={loading}>
+          <button type="submit" className="auth-button au-btn" disabled={loading}>
             {loading ? "Cargando..." : "Ingresar"}
           </button>
         </div>

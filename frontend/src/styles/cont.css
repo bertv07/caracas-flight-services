@@ -1,0 +1,23 @@
+.con-cont{
+    margin-top: 0 !important;
+    margin-left: 3rem !important;
+}
+.cont-for{
+    width: 40rem !important;
+}
+
+.form-group textarea{
+    height: 2.5rem !important;
+}
+.contact-number, .contact-email{
+    width: 17rem !important;
+    border-radius: 24px;
+    border: 2px solid var(--color-green) !important;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.map-container h3{
+    margin-left: 1rem;
+    margin-top: 1rem !important; 
+}

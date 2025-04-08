@@ -40,7 +40,7 @@ export default function AnimatedTimeline({ items = [] }) {
         start: "top bottom",
         end: "bottom center",
         scrub: 0.5,
-        markers: true,
+        markers: false,
       },
     })
 
