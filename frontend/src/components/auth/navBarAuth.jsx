@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import logo from "../../assets/img/logo.png"
 import { isAuthenticated, getUserRole } from "../../utils/authUtils"
-import "../../styles/navBarAuth.css"
+import "../../styles/navbarauth.css"
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false)
