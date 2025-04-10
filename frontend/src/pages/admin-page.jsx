@@ -1,4 +1,5 @@
 "use client"
+
 import { useState, useEffect } from "react"
 import LogoutButton from "../components/auth/LogoutButton"
 import NavBar from "../components/auth/navBarAuth"
@@ -18,6 +19,8 @@ export default function AdminDashboard() {
   const [loadingDocuments, setLoadingDocuments] = useState(false)
   const [documentError, setDocumentError] = useState(null)
 
+  const API_URL = import.meta.env.VITE_API_URL
+
   useEffect(() => {
     if (activeTab === "users") {
       fetchUsers()
@@ -31,17 +34,14 @@ export default function AdminDashboard() {
       if (!token) {
         throw new Error("No hay token de autenticación")
       }
-
-      const response = await fetch(`http://localhost:3000/api/admin/users`, {
+      const response = await fetch(`${API_URL}/api/admin/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-
       if (!response.ok) {
         throw new Error(`Error al cargar usuarios: ${response.status}`)
       }
-
       const data = await response.json()
       setUsers(data)
     } catch (err) {
@@ -54,18 +54,16 @@ export default function AdminDashboard() {
   const handleApproveUser = async (userId) => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/api/admin/users/${userId}/approve`, {
+      const response = await fetch(`${API_URL}/api/admin/users/${userId}/approve`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-
       if (!response.ok) {
         throw new Error("Error al aprobar usuario")
       }
-
       // Actualizar la lista de usuarios
       fetchUsers()
     } catch (error) {
@@ -82,7 +80,7 @@ export default function AdminDashboard() {
     e.preventDefault()
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/api/admin/users/${editingUser.id}`, {
+      const response = await fetch(`${API_URL}/api/admin/users/${editingUser.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -93,11 +91,9 @@ export default function AdminDashboard() {
           status: editingUser.status,
         }),
       })
-
       if (!response.ok) {
         throw new Error("Error al actualizar usuario")
       }
-
       setShowEditModal(false)
       fetchUsers()
     } catch (error) {
@@ -111,13 +107,11 @@ export default function AdminDashboard() {
       setLoadingDocuments(true)
       setDocumentError(null)
       const token = localStorage.getItem("token")
-
-      const response = await fetch(`http://localhost:3000/api/documents/user/${userId}`, {
+      const response = await fetch(`${API_URL}/api/documents/user/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-
       if (!response.ok) {
         if (response.status === 404) {
           setSelectedUserDocuments({
@@ -136,7 +130,6 @@ export default function AdminDashboard() {
           documents: data,
         })
       }
-
       setShowDocumentsModal(true)
     } catch (err) {
       setDocumentError(err.message)
@@ -149,29 +142,24 @@ export default function AdminDashboard() {
   const handleDownloadDocument = async (documentUrl, documentName) => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000${documentUrl}`, {
+      const response = await fetch(`${API_URL}${documentUrl}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-
       if (!response.ok) {
         throw new Error(`Error al descargar documento: ${response.status}`)
       }
-
       // Convertir la respuesta a blob
       const blob = await response.blob()
-
       // Crear un objeto URL para el blob
       const url = window.URL.createObjectURL(blob)
-
       // Crear un elemento <a> para descargar
       const a = document.createElement("a")
       a.href = url
       a.download = documentName
       document.body.appendChild(a)
       a.click()
-
       // Limpiar
       window.URL.revokeObjectURL(url)
       document.body.removeChild(a)
@@ -248,7 +236,6 @@ export default function AdminDashboard() {
           <h1 className="admin-title">Panel de Administración</h1>
           <LogoutButton />
         </div>
-
         <div className="admin-tabs">
           <button
             className={`admin-tab ${activeTab === "users" ? "active" : ""}`}
@@ -263,13 +250,11 @@ export default function AdminDashboard() {
             Suscripciones
           </button>
         </div>
-
         <div className="admin-content">
           {activeTab === "users" && renderUsersTab()}
           {activeTab === "subscriptions" && <SubscriptionApproval />}
         </div>
       </div>
-
       {/* Modal de edición de usuario */}
       {showEditModal && editingUser && (
         <div className="modal-overlay">
@@ -322,13 +307,11 @@ export default function AdminDashboard() {
           </div>
         </div>
       )}
-
       {/* Modal para ver documentos */}
       {showDocumentsModal && selectedUserDocuments && (
         <div className="modal-overlay">
           <div className="modal-content documents-modal">
             <h2>Documentos de {selectedUserDocuments.username}</h2>
-
             {loadingDocuments ? (
               <p>Cargando documentos...</p>
             ) : documentError ? (
@@ -341,7 +324,7 @@ export default function AdminDashboard() {
                   <h3>Foto de Perfil</h3>
                   <div className="document-preview">
                     <img
-                      src={`http://localhost:3000${selectedUserDocuments.documents.profilePhoto}`}
+                      src={`${API_URL}${selectedUserDocuments.documents.profilePhoto}`}
                       alt="Foto de perfil"
                     />
                   </div>
@@ -357,12 +340,11 @@ export default function AdminDashboard() {
                     Descargar
                   </button>
                 </div>
-
                 <div className="document-card">
                   <h3>Foto de Verificación</h3>
                   <div className="document-preview">
                     <img
-                      src={`http://localhost:3000${selectedUserDocuments.documents.verificationPhoto}`}
+                      src={`${API_URL}${selectedUserDocuments.documents.verificationPhoto}`}
                       alt="Foto de verificación"
                     />
                   </div>
@@ -378,12 +360,11 @@ export default function AdminDashboard() {
                     Descargar
                   </button>
                 </div>
-
                 <div className="document-card">
                   <h3>Foto de Identificación</h3>
                   <div className="document-preview">
                     <img
-                      src={`http://localhost:3000${selectedUserDocuments.documents.idPhoto}`}
+                      src={`${API_URL}${selectedUserDocuments.documents.idPhoto}`}
                       alt="Foto de identificación"
                     />
                   </div>
@@ -401,7 +382,6 @@ export default function AdminDashboard() {
                 </div>
               </div>
             )}
-
             <div className="modal-actions">
               <button className="btn-cancel" onClick={() => setShowDocumentsModal(false)}>
                 Cerrar
@@ -413,4 +393,3 @@ export default function AdminDashboard() {
     </div>
   )
 }
-

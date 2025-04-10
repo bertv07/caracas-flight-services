@@ -24,7 +24,7 @@ export default function EditProfileForm() {
         console.log("Obteniendo datos para el ID de usuario:", userId);
 
         const response = await fetch(
-          `http://localhost:3000/api/users/users/${userId}`,
+          `${import.meta.env.VITE_API_URL}/api/users/users/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,

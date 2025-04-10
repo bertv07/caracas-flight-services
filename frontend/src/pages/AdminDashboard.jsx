@@ -1,4 +1,5 @@
 "use client"
+
 import { useState, useEffect } from "react"
 import LogoutButton from "../components/auth/LogoutButton"
 import NavBar from "../components/auth/navBarAuth"
@@ -24,6 +25,8 @@ export default function AdminDashboard() {
   const [subscriptionError, setSubscriptionError] = useState(null)
   const [successMessage, setSuccessMessage] = useState("")
 
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000'
+
   useEffect(() => {
     if (activeTab === "users") {
       fetchUsers()
@@ -37,17 +40,14 @@ export default function AdminDashboard() {
       if (!token) {
         throw new Error("No hay token de autenticación")
       }
-
-      const response = await fetch(`http://localhost:3000/api/admin/users`, {
+      const response = await fetch(`${API_URL}/api/admin/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-
       if (!response.ok) {
         throw new Error(`Error al cargar usuarios: ${response.status}`)
       }
-
       const data = await response.json()
       setUsers(data)
     } catch (err) {
@@ -60,18 +60,16 @@ export default function AdminDashboard() {
   const handleApproveUser = async (userId) => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/api/admin/users/${userId}/approve`, {
+      const response = await fetch(`${API_URL}/api/admin/users/${userId}/approve`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-
       if (!response.ok) {
         throw new Error("Error al aprobar usuario")
       }
-
       // Actualizar la lista de usuarios
       fetchUsers()
     } catch (error) {
@@ -88,7 +86,7 @@ export default function AdminDashboard() {
     e.preventDefault()
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/api/admin/users/${editingUser.id}`, {
+      const response = await fetch(`${API_URL}/api/admin/users/${editingUser.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -99,11 +97,9 @@ export default function AdminDashboard() {
           status: editingUser.status,
         }),
       })
-
       if (!response.ok) {
         throw new Error("Error al actualizar usuario")
       }
-
       setShowEditModal(false)
       fetchUsers()
     } catch (error) {
@@ -117,13 +113,11 @@ export default function AdminDashboard() {
       setLoadingDocuments(true)
       setDocumentError(null)
       const token = localStorage.getItem("token")
-
-      const response = await fetch(`http://localhost:3000/api/documents/user/${userId}`, {
+      const response = await fetch(`${API_URL}/api/documents/user/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-
       if (!response.ok) {
         if (response.status === 404) {
           setSelectedUserDocuments({
@@ -142,7 +136,6 @@ export default function AdminDashboard() {
           documents: data,
         })
       }
-
       setShowDocumentsModal(true)
     } catch (err) {
       setDocumentError(err.message)
@@ -155,29 +148,24 @@ export default function AdminDashboard() {
   const handleDownloadDocument = async (documentUrl, documentName) => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000${documentUrl}`, {
+      const response = await fetch(`${API_URL}${documentUrl}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-
       if (!response.ok) {
         throw new Error(`Error al descargar documento: ${response.status}`)
       }
-
       // Convertir la respuesta a blob
       const blob = await response.blob()
-
       // Crear un objeto URL para el blob
       const url = window.URL.createObjectURL(blob)
-
       // Crear un elemento <a> para descargar
       const a = document.createElement("a")
       a.href = url
       a.download = documentName
       document.body.appendChild(a)
       a.click()
-
       // Limpiar
       window.URL.revokeObjectURL(url)
       document.body.removeChild(a)
@@ -193,24 +181,20 @@ export default function AdminDashboard() {
       setSubscriptionError(null)
       setSuccessMessage("")
       const token = localStorage.getItem("token")
-
-      const response = await fetch(`http://localhost:3000/api/subscriptions/user/${userId}`, {
+      const response = await fetch(`${API_URL}/api/subscriptions/user/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
-
       if (!response.ok) {
         throw new Error(`Error al cargar suscripciones: ${response.status}`)
       }
-
       const data = await response.json()
       setSelectedUserSubscriptions({
         userId,
         username,
         subscriptions: data,
       })
-
       setShowSubscriptionsModal(true)
     } catch (err) {
       setSubscriptionError(err.message)
@@ -223,18 +207,16 @@ export default function AdminDashboard() {
   const handleApproveSubscription = async (subscriptionId) => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/api/admin/approve-subscription/${subscriptionId}`, {
+      const response = await fetch(`${API_URL}/api/admin/approve-subscription/${subscriptionId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-
       if (!response.ok) {
         throw new Error("Error al aprobar suscripción")
       }
-
       // Actualizar la lista de suscripciones
       if (selectedUserSubscriptions) {
         const updatedSubscriptions = selectedUserSubscriptions.subscriptions.map((sub) => {
@@ -243,22 +225,18 @@ export default function AdminDashboard() {
           }
           return sub
         })
-
         setSelectedUserSubscriptions({
           ...selectedUserSubscriptions,
           subscriptions: updatedSubscriptions,
         })
       }
-
       setSuccessMessage("Suscripción aprobada exitosamente")
-
       // Limpiar el mensaje después de 3 segundos
       setTimeout(() => {
         setSuccessMessage("")
       }, 3000)
     } catch (error) {
       setSubscriptionError(error.message)
-
       // Limpiar el mensaje de error después de 3 segundos
       setTimeout(() => {
         setSubscriptionError("")
@@ -270,18 +248,16 @@ export default function AdminDashboard() {
   const handleRejectSubscription = async (subscriptionId) => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/api/admin/reject-subscription/${subscriptionId}`, {
+      const response = await fetch(`${API_URL}/api/admin/reject-subscription/${subscriptionId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-
       if (!response.ok) {
         throw new Error("Error al rechazar suscripción")
       }
-
       // Actualizar la lista de suscripciones
       if (selectedUserSubscriptions) {
         const updatedSubscriptions = selectedUserSubscriptions.subscriptions.map((sub) => {
@@ -290,22 +266,18 @@ export default function AdminDashboard() {
           }
           return sub
         })
-
         setSelectedUserSubscriptions({
           ...selectedUserSubscriptions,
           subscriptions: updatedSubscriptions,
         })
       }
-
       setSuccessMessage("Suscripción rechazada exitosamente")
-
       // Limpiar el mensaje después de 3 segundos
       setTimeout(() => {
         setSuccessMessage("")
       }, 3000)
     } catch (error) {
       setSubscriptionError(error.message)
-
       // Limpiar el mensaje de error después de 3 segundos
       setTimeout(() => {
         setSubscriptionError("")
@@ -317,18 +289,16 @@ export default function AdminDashboard() {
   const handleCancelSubscription = async (subscriptionId) => {
     try {
       const token = localStorage.getItem("token")
-      const response = await fetch(`http://localhost:3000/api/subscriptions/${subscriptionId}/cancel`, {
+      const response = await fetch(`${API_URL}/api/subscriptions/${subscriptionId}/cancel`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-
       if (!response.ok) {
         throw new Error("Error al cancelar suscripción")
       }
-
       // Actualizar la lista de suscripciones
       if (selectedUserSubscriptions) {
         const updatedSubscriptions = selectedUserSubscriptions.subscriptions.map((sub) => {
@@ -337,22 +307,18 @@ export default function AdminDashboard() {
           }
           return sub
         })
-
         setSelectedUserSubscriptions({
           ...selectedUserSubscriptions,
           subscriptions: updatedSubscriptions,
         })
       }
-
       setSuccessMessage("Suscripción cancelada exitosamente")
-
       // Limpiar el mensaje después de 3 segundos
       setTimeout(() => {
         setSuccessMessage("")
       }, 3000)
     } catch (error) {
       setSubscriptionError(error.message)
-
       // Limpiar el mensaje de error después de 3 segundos
       setTimeout(() => {
         setSubscriptionError("")
@@ -377,7 +343,6 @@ export default function AdminDashboard() {
   const getStatusBadge = (status) => {
     // Usar un valor predeterminado si status es undefined
     const statusValue = status || "pending"
-
     const statusStyles = {
       approved: {
         bg: "#d4edda",
@@ -405,9 +370,7 @@ export default function AdminDashboard() {
         text: "Cancelado",
       },
     }
-
     const style = statusStyles[statusValue] || statusStyles.pending
-
     return (
       <span
         className="status-badge"
@@ -512,7 +475,6 @@ export default function AdminDashboard() {
           <h1 className="admin-title">Panel de Administración</h1>
           <LogoutButton />
         </div>
-
         <div className="admin-tabs">
           <button
             className={`admin-tab ${activeTab === "users" ? "active" : ""}`}
@@ -527,13 +489,11 @@ export default function AdminDashboard() {
             Suscripciones
           </button>
         </div>
-
         <div className="admin-content">
           {activeTab === "users" && renderUsersTab()}
           {activeTab === "subscriptions" && <SubscriptionApproval />}
         </div>
       </div>
-
       {/* Modal de edición de usuario */}
       {showEditModal && editingUser && (
         <div className="modal-overlay">
@@ -586,13 +546,11 @@ export default function AdminDashboard() {
           </div>
         </div>
       )}
-
       {/* Modal para ver documentos */}
       {showDocumentsModal && selectedUserDocuments && (
         <div className="modal-overlay">
           <div className="modal-content documents-modal">
             <h2>Documentos de {selectedUserDocuments.username}</h2>
-
             {loadingDocuments ? (
               <p>Cargando documentos...</p>
             ) : documentError ? (
@@ -605,7 +563,7 @@ export default function AdminDashboard() {
                   <h3>Foto de Perfil</h3>
                   <div className="document-preview">
                     <img
-                      src={`http://localhost:3000${selectedUserDocuments.documents.profilePhoto}`}
+                      src={`${API_URL}${selectedUserDocuments.documents.profilePhoto}`}
                       alt="Foto de perfil"
                     />
                   </div>
@@ -621,12 +579,11 @@ export default function AdminDashboard() {
                     Descargar
                   </button>
                 </div>
-
                 <div className="document-card">
                   <h3>Foto de Verificación</h3>
                   <div className="document-preview">
                     <img
-                      src={`http://localhost:3000${selectedUserDocuments.documents.verificationPhoto}`}
+                      src={`${API_URL}${selectedUserDocuments.documents.verificationPhoto}`}
                       alt="Foto de verificación"
                     />
                   </div>
@@ -642,12 +599,11 @@ export default function AdminDashboard() {
                     Descargar
                   </button>
                 </div>
-
                 <div className="document-card">
                   <h3>Foto de Identificación</h3>
                   <div className="document-preview">
                     <img
-                      src={`http://localhost:3000${selectedUserDocuments.documents.idPhoto}`}
+                      src={`${API_URL}${selectedUserDocuments.documents.idPhoto}`}
                       alt="Foto de identificación"
                     />
                   </div>
@@ -665,7 +621,6 @@ export default function AdminDashboard() {
                 </div>
               </div>
             )}
-
             <div className="modal-actions">
               <button className="btn-cancel" onClick={() => setShowDocumentsModal(false)}>
                 Cerrar
@@ -674,17 +629,13 @@ export default function AdminDashboard() {
           </div>
         </div>
       )}
-
       {/* Modal para ver suscripciones */}
       {showSubscriptionsModal && selectedUserSubscriptions && (
         <div className="modal-overlay">
           <div className="modal-content subscriptions-modal">
             <h2>Suscripciones de {selectedUserSubscriptions.username}</h2>
-
             {successMessage && <div className="success-message">{successMessage}</div>}
-
             {subscriptionError && <div className="error-message">{subscriptionError}</div>}
-
             {loadingSubscriptions ? (
               <p>Cargando suscripciones...</p>
             ) : selectedUserSubscriptions.subscriptions.length === 0 ? (
@@ -756,7 +707,6 @@ export default function AdminDashboard() {
                 </table>
               </div>
             )}
-
             <div className="modal-actions">
               <button className="btn-cancel" onClick={() => setShowSubscriptionsModal(false)}>
                 Cerrar
@@ -768,4 +718,3 @@ export default function AdminDashboard() {
     </div>
   )
 }
-

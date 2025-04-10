@@ -6,6 +6,7 @@ import NavBar from "../components/auth/navBarAuth"
 import "../styles/subscriptions.css"
 
 export default function SubscriptionPage() {
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000"
   const [subscriptions, setSubscriptions] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -19,7 +20,7 @@ export default function SubscriptionPage() {
       const userId = getUserId()
       setLoading(true)
 
-      const response = await fetch(`http://localhost:3000/api/subscriptions/user/${userId}`, {
+      const response = await fetch(`${API_URL}/api/subscriptions/user/${userId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

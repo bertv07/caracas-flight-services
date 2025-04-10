@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const transporter = require('../config/mail');
-
+require('dotenv').config();
+const host = process.env.HOST;
 // Correo de bienvenida al usuario cuando se registra
 const sendWelcomeEmail = async (user) => {
   try {
@@ -52,7 +53,7 @@ const notifyAdminsAboutNewUser = async (user, adminEmails) => {
           </div>
           <p>Por favor, inicie sesión en el panel de administración para revisar y aprobar/rechazar este usuario.</p>
           <div style="text-align: center; margin-top: 25px;">
-            <a href="${process.env.ADMIN_URL || 'http://localhost:3000/admin'}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ir al Panel de Administración</a>
+            <a href="${process.env.ADMIN_URL || `${process.env.HOST}/admin`}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ir al Panel de Administración</a>
           </div>
         </div>
       `
@@ -79,7 +80,7 @@ const sendAccountApprovalEmail = async (user) => {
           <p>Nos complace informarte que tu cuenta en Caracas Flight Services ha sido <strong style="color: #28a745;">aprobada</strong>.</p>
           <p>Ya puedes iniciar sesión y disfrutar de todos nuestros servicios.</p>
           <div style="text-align: center; margin: 30px 0;">
-            <a href="${process.env.WEBSITE_URL || 'http://localhost:3000/login'}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Iniciar Sesión</a>
+            <a href="${process.env.WEBSITE_URL || `${process.env.HOST}/login`}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Iniciar Sesión</a>
           </div>
           <p>Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos.</p>
           <p style="margin-top: 30px;">Saludos cordiales,</p>
@@ -177,7 +178,7 @@ const notifyAdminsAboutNewSubscription = async (user, subscription, service, adm
           </div>
           <p>Por favor, inicie sesión en el panel de administración para revisar y aprobar/rechazar esta solicitud.</p>
           <div style="text-align: center; margin-top: 25px;">
-            <a href="${process.env.ADMIN_URL || 'http://localhost:3000/admin'}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ir al Panel de Administración</a>
+            <a href="${process.env.ADMIN_URL || `${process.env.HOST}/admin`}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ir al Panel de Administración</a>
           </div>
         </div>
       `
@@ -211,7 +212,7 @@ const sendSubscriptionApprovalEmail = async (user, subscription, service) => {
           </ul>
           <p>Ya puedes disfrutar de todos los beneficios de este servicio.</p>
           <div style="text-align: center; margin: 30px 0;">
-            <a href="${process.env.WEBSITE_URL || 'http://localhost:3000/dashboard'}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ir a Mi Dashboard</a>
+            <a href="${process.env.WEBSITE_URL || `${process.env.HOST}/dashboard`}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ir a Mi Dashboard</a>
           </div>
           <p>Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos.</p>
           <p style="margin-top: 30px;">Saludos cordiales,</p>
@@ -309,7 +310,7 @@ const sendPaymentReminderEmail = async (user, subscription, service, daysRemaini
           </ul>
           <p>Por favor, asegúrate de tener fondos disponibles para el cargo automático o realiza el pago manualmente antes de la fecha límite para evitar interrupciones en tu servicio.</p>
           <div style="text-align: center; margin: 30px 0;">
-            <a href="${process.env.WEBSITE_URL || 'http://localhost:3000/dashboard/payments'}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Gestionar Pagos</a>
+            <a href="${process.env.WEBSITE_URL || `${process.env.HOST}/dashboard/payments`}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Gestionar Pagos</a>
           </div>
           <p>Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos.</p>
           <p style="margin-top: 30px;">Saludos cordiales,</p>
@@ -347,7 +348,7 @@ const sendPaymentConfirmationEmail = async (user, subscription, service, payment
           </div>
           <p>Tu suscripción ha sido actualizada y continuará activa hasta el próximo ciclo de pago.</p>
           <div style="text-align: center; margin: 30px 0;">
-            <a href="${process.env.WEBSITE_URL || 'http://localhost:3000/dashboard/payments'}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ver Historial de Pagos</a>
+            <a href="${process.env.WEBSITE_URL || `${process.env.HOST}/dashboard/payments`}" style="background-color: #003366; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Ver Historial de Pagos</a>
           </div>
           <p>Si tienes alguna pregunta o necesitas asistencia, no dudes en contactarnos.</p>
           <p style="margin-top: 30px;">Saludos cordiales,</p>
@@ -367,7 +368,7 @@ const sendPaymentConfirmationEmail = async (user, subscription, service, payment
 const sendPasswordResetEmail = async (user, resetToken) => {
   try {
     // Crear la URL de restablecimiento con el token
-    const resetUrl = `${process.env.WEBSITE_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`;
+    const resetUrl = `${process.env.WEBSITE_URL || `${process.env.HOST}`}/reset-password?token=${resetToken}`;
     
     await transporter.sendMail({
       from: 'caracas.flight.services.email@gmail.com',

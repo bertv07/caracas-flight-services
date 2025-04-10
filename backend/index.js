@@ -12,10 +12,10 @@ const transporter = require('./config/mail');
 const app = express();
 const port = process.env.PORT;
 const host = process.env.HOST;
-
+const origin = process.env.ORIGIN;
 // Configurar CORS para permitir solicitudes desde tu frontend
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'], // Orígenes permitidos
+  origin: [`${origin}`, 'http://127.0.0.1:5173'], // Orígenes permitidos
   credentials: true, // Permitir cookies en solicitudes cross-origin
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'] // Headers permitidos
@@ -30,7 +30,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json());
 app.use(cors({
-    origin: 'http://localhost:5173', // Reemplaza con tu URL de frontend
+    origin: `${origin}`, // Reemplaza con tu URL de frontend
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: ['Content-Type', 'Authorization'], // <- Agrega Authorization
     credentials: true

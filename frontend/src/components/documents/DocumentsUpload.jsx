@@ -3,9 +3,11 @@
 import { useState, useEffect, useRef } from "react"
 import { getUserId } from "../../utils/authUtils"
 import "../../styles/documents.css"
+const API = import.meta.env.VITE_API_URL;
+
 
 export default function DocumentsUpload() {
-  const API_URL = "http://localhost:3000" // URL directa del servidor
+  const API_URL = `${API}` // URL directa del servidor
   const [documents, setDocuments] = useState({
     profilePhoto: null,
     verificationPhoto: null,
