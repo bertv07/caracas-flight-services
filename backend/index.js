@@ -15,7 +15,7 @@ const host = process.env.HOST;
 const origin = process.env.ORIGIN;
 // Configurar CORS para permitir solicitudes desde tu frontend
 app.use(cors({
-  origin: [`${origin}`, 'http://127.0.0.1:5173'], // Orígenes permitidos
+  origin: [`${origin}`], // Orígenes permitidos
   credentials: true, // Permitir cookies en solicitudes cross-origin
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'] // Headers permitidos
@@ -29,14 +29,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Middlewares
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json());
-app.use(cors({
-    origin: `${origin}`, // Reemplaza con tu URL de frontend
-    methods: 'GET,POST,PUT,DELETE',
-    allowedHeaders: ['Content-Type', 'Authorization'], // <- Agrega Authorization
-    credentials: true
-  }));
-app.use(cookieParser());
-
 // Configuración de Sequelize
 const sequelize = new Sequelize(
     dbConfig.database,
