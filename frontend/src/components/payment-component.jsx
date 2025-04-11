@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js"
+
 import "../styles/auth.css"
 import "../styles/services.css"
 
@@ -233,61 +233,8 @@ export default function PaymentComponent({ service, onClose, onSuccess }) {
 
         {/* Formulario según método de pago */}
         {paymentMethod === "paypal" && (
-          <div
-            style={{
-              marginBottom: "1.5rem",
-              backgroundColor: "white",
-              padding: "1rem",
-              borderRadius: "12px",
-              boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-            }}
-          >
-            <PayPalScriptProvider options={{ "client-id": PAYPAL_CLIENT_ID }}>
-              <PayPalButtons
-                style={{ layout: "horizontal" }}
-                createOrder={(data, actions) => {
-                  return actions.order.create({
-                    purchase_units: [
-                      {
-                        description: `Suscripción a ${service.titulo || service.name}`,
-                        amount: {
-                          currency_code: "USD",
-                          value: price,
-                        },
-                      },
-                    ],
-                  })
-                }}
-                onApprove={(data, actions) => {
-                  setLoading(true)
-                  return actions.order
-                    .capture()
-                    .then((details) => {
-                      // Pago exitoso, ahora creamos la suscripción
-                      onSuccess({
-                        ...formData,
-                        paymentMethod: "paypal",
-                        paypalOrderId: data.orderID,
-                        status: "approved", // Los pagos por PayPal se aprueban automáticamente
-                      })
-                    })
-                    .catch((err) => {
-                      console.error("Error al capturar el pago:", err)
-                      setError("Error al procesar el pago. Por favor, inténtelo de nuevo.")
-                    })
-                    .finally(() => {
-                      setLoading(false)
-                    })
-                }}
-                onError={(err) => {
-                  setError("Error al procesar el pago con PayPal. Por favor, inténtelo de nuevo.")
-                  console.error("PayPal error:", err)
-                }}
-                onCancel={() => {
-                  console.log("Pago cancelado por el usuario")
-                }}
-              />
-            </PayPalScriptProvider>
+          <div>
+\             <h3>Próximamente</h3>
           </div>
         )}
 
