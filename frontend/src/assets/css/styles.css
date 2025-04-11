@@ -1702,6 +1702,12 @@
 
 /* Mobile */
 @media (max-width: 480px) {
+  .custom-logo img{
+    margin-top: .5rem !important;
+  }
+  .custom-nav{
+    height: 5rem !important;
+  }
   .cForm{
     margin-left:-1rem !important;
   }
